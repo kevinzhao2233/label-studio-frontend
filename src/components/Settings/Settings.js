@@ -53,20 +53,20 @@ export default observer(({ store }) => {
   return (
     <Modal
       visible={store.showingSettings}
-      title="Settings"
+      title="设置"
       bodyStyle={{ paddingTop: "0" }}
       footer=""
       onCancel={store.toggleSettings}
     >
       <Tabs defaultActiveKey="1">
-        <Tabs.TabPane tab="General" key="1">
+        <Tabs.TabPane tab="通用" key="1">
           <Checkbox
             checked={store.settings.enableHotkeys}
             onChange={() => {
               store.settings.toggleHotkeys();
             }}
           >
-            启用热键进行标注
+            启用快捷键进行标注
           </Checkbox>
           <br />
           <Checkbox
@@ -75,7 +75,7 @@ export default observer(({ store }) => {
               store.settings.toggleTooltips();
             }}
           >
-            显示热键提示
+            显示快捷键提示
           </Checkbox>
           <br />
           <Checkbox
@@ -84,7 +84,7 @@ export default observer(({ store }) => {
               store.settings.toggleLabelTooltips();
             }}
           >
-            显示标签上的热键提示
+            显示标签上的快捷键提示
           </Checkbox>
           <br />
           <Checkbox
@@ -142,10 +142,10 @@ export default observer(({ store }) => {
           {/*     Save every <InputNumber size="small" min={5} max={120} /> seconds */}
           {/*   </div> } */}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Hotkeys" key="2">
+        <Tabs.TabPane tab="快捷键" key="2">
           <HotkeysDescription />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Layout" key="3">
+        <Tabs.TabPane tab="布局" key="3">
           <Checkbox
             checked={store.settings.bottomSidePanel}
             onChange={() => {
