@@ -24,11 +24,11 @@ export const DraftPanel = observer(({ item }) => {
     return <div>draft{saved}</div>;
   }
   if (!item.versions.result || !item.versions.result.length) {
-    return <div>{saved ? `draft${saved}` : "not submitted draft"}</div>;
+    return <div>{saved ? `草稿${saved}` : "该草稿未提交"}</div>;
   }
   return (
     <div>
-      <Tooltip placement="topLeft" title={item.draftSelected ? "switch to submitted result" : "switch to current draft"}>
+      <Tooltip placement="topLeft" title={item.draftSelected ? "切换未已提交的结果" : "切换到当前草稿"}>
         <Button type="link" onClick={item.toggleDraft} className={styles.draftbtn}>
           {item.draftSelected ? "draft" : "submitted"}
         </Button>
@@ -40,7 +40,7 @@ export const DraftPanel = observer(({ item }) => {
 
 const Annotation = observer(({ item, store }) => {
   const removeHoney = () => (
-    <Tooltip placement="topLeft" title="Unset this result as a ground truth">
+    <Tooltip placement="topLeft" title="取消星标">
       <Button
         size="small"
         type="primary"
@@ -56,8 +56,8 @@ const Annotation = observer(({ item, store }) => {
 
   const setHoney = () => {
     const title = item.ground_truth
-      ? "Unset this result as a ground truth"
-      : "Set this result as a ground truth";
+      ? "取消星标"
+      : "设为星标";
 
     return (
       <Tooltip placement="topLeft" title={title}>
@@ -149,14 +149,14 @@ const Annotation = observer(({ item, store }) => {
         {store.hasInterface("ground-truth") && (item.ground_truth ? removeHoney() : setHoney())}
         &nbsp;
         {store.hasInterface("annotations:delete") && (
-          <Tooltip placement="topLeft" title="Delete selected annotation">
+          <Tooltip placement="topLeft" title="删除该标注任务">
             <Popconfirm
               placement="bottomLeft"
-              title={"Please confirm you want to delete this annotation"}
+              title={"是否删除？"}
               onConfirm={confirm}
-              okText="Delete"
+              okText="删除"
               okType="danger"
-              cancelText="Cancel"
+              cancelText="取消"
             >
               <Button size="small" danger style={{ background: "transparent" }}>
                 <DeleteOutlined />
@@ -186,12 +186,12 @@ const Annotation = observer(({ item, store }) => {
           </div>
           {item.pk ? "Created" : "Started"}
           <i>{item.createdAgo ? ` ${item.createdAgo} ago` : ` ${Utils.UDate.prettyDate(item.createdDate)}`}</i>
-          {item.createdBy && item.pk ? ` by ${item.createdBy}` : null}
+          {item.createdBy && item.pk ? ` 创建人： ${item.createdBy}` : null}
           <DraftPanel item={item} />
         </div>
         {/* platform uses was_cancelled so check both */}
         {store.hasInterface("skip") && (item.skipped || item.was_cancelled) && (
-          <Tooltip placement="topLeft" title="Skipped annotation">
+          <Tooltip placement="topLeft" title="跳过的标注任务">
             <StopOutlined className={styles.skipped} />
           </Tooltip>
         )}
@@ -218,7 +218,7 @@ class Annotations extends Component {
 
         <div style={{ marginRight: "1px" }}>
           {store.hasInterface("annotations:add-new") && (
-            <Tooltip placement="topLeft" title="Create a new annotation">
+            <Tooltip placement="topLeft" title="创建一个新的标注任务">
               <Button
                 size="small"
                 onClick={ev => {
@@ -234,7 +234,7 @@ class Annotations extends Component {
             </Tooltip>
           )}
           &nbsp;
-          <Tooltip placement="topLeft" title="View all annotations">
+          <Tooltip placement="topLeft" title="查看所有标注任务">
             <Button
               size="small"
               type={store.annotationStore.viewingAllAnnotations ? "primary" : ""}

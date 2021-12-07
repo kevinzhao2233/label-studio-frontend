@@ -9,8 +9,8 @@ const { Block, Elem } = BemWithSpecifiContext();
 
 export const GroundTruth = observer(({ entity, disabled = false, size = 36 }) => {
   const title = entity.ground_truth
-    ? "Unset this result as a ground truth"
-    : "Set this result as a ground truth";
+    ? "取消星标"
+    : "设置星标";
 
   const sizeStyle = {
     width: size,

@@ -66,7 +66,7 @@ export default observer(({ store }) => {
               store.settings.toggleHotkeys();
             }}
           >
-            启用快捷键进行标注
+            启用快捷键进行标记
           </Checkbox>
           <br />
           <Checkbox
