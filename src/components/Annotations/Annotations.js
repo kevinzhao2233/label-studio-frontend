@@ -57,7 +57,7 @@ const Annotation = observer(({ item, store }) => {
   const setHoney = () => {
     const title = item.ground_truth
       ? "取消星标"
-      : "设为星标";
+      : "设为星标（星标的标注会被作为基准）";
 
     return (
       <Tooltip placement="topLeft" title={title}>

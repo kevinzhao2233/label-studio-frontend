@@ -68,7 +68,7 @@ export default observer(({ store, annotation }) => {
     entityButtons.push(
       <Hotkey.Tooltip key="relations" placement="topLeft" name="region:relation">
         <Button
-          aria-label="Create Relation"
+          aria-label="创建关联"
           className={styles.button}
           onClick={() => {
             annotation.startRelationMode(node);
@@ -83,7 +83,7 @@ export default observer(({ store, annotation }) => {
     );
 
     entityButtons.push(
-      <Tooltip key="meta" placement="topLeft" title="Add Meta Information">
+      <Tooltip key="meta" placement="topLeft" title="添加元数据">
         <Button
           className={styles.button}
           onClick={() => {
@@ -206,11 +206,11 @@ export default observer(({ store, annotation }) => {
               node.setNormInput(value);
             }}
             style={{ marginBottom: "0.5em" }}
-            placeholder="Meta Information"
+            placeholder="元数据"
           />
 
           <Button type="primary" htmlType="submit" style={{ marginRight: "0.5em" }}>
-            Add
+            添加
           </Button>
 
           <Button
@@ -223,7 +223,7 @@ export default observer(({ store, annotation }) => {
               return false;
             }}
           >
-            Cancel
+            取消
           </Button>
         </Form>
       )}

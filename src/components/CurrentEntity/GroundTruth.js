@@ -10,7 +10,7 @@ const { Block, Elem } = BemWithSpecifiContext();
 export const GroundTruth = observer(({ entity, disabled = false, size = 36 }) => {
   const title = entity.ground_truth
     ? "取消星标"
-    : "设置星标";
+    : "设为星标（星标的标注会被作为基准）";
 
   const sizeStyle = {
     width: size,
