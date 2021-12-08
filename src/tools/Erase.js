@@ -29,7 +29,7 @@ const IconDot = ({ size }) => {
 const ToolView = observer(({ item }) => {
   return (
     <Tool
-      label="Eraser"
+      label="橡皮擦"
       ariaLabel="eraser"
       shortcut="E"
       active={item.selected}

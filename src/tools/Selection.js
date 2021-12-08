@@ -14,7 +14,7 @@ const _Tool = types.model("SelectionTool", {
       return true;
     },
     get viewTooltip() {
-      return "Move";
+      return "选择";
     },
     get iconComponent() {
       return IconMoveTool;

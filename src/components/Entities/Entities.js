@@ -41,11 +41,11 @@ export default observer(({
               regionStore.setView(e.target.value);
             }}
           >
-            <RadioGroup.Button value="regions">Regions{count ? <Elem name="counter">&nbsp;{count}</Elem> : null}</RadioGroup.Button>
-            <RadioGroup.Button value="labels">Labels</RadioGroup.Button>
+            <RadioGroup.Button value="regions">标注区域{count ? <Elem name="counter">&nbsp;{count}</Elem> : null}</RadioGroup.Button>
+            <RadioGroup.Button value="labels">标签</RadioGroup.Button>
           </RadioGroup>
 
-          <Tooltip title="Delete All Regions">
+          <Tooltip title="删除所有已标注的信息">
             <Button
               look="danger"
               type="text"
@@ -58,9 +58,11 @@ export default observer(({
               }}
               onClick={() => {
                 confirm({
-                  title: "Removing all regions",
-                  body: "Do you want to delete all annotated regions?",
+                  title: "删除所有已标注的信息",
+                  body: "确定要删除所有已标注的信息吗?",
                   buttonLook: "destructive",
+                  okText: '删除',
+                  cancelText: '取消',
                   onOk: () => annotation.deleteAllRegions(),
                 });
               }}/>
@@ -74,7 +76,7 @@ export default observer(({
             {regionStore.view === "regions"  && (
               <Dropdown overlay={<SortMenu regionStore={regionStore}/>} placement="bottomLeft">
                 <Elem name="sort" onClick={e => e.preventDefault()}>
-                  <Elem name="sort-icon"><SortMenuIcon sortKey={regionStore.sort}/></Elem> {`Sorted by ${regionStore.sort[0].toUpperCase()}${regionStore.sort.slice(1)}`}
+                  <Elem name="sort-icon"><SortMenuIcon sortKey={regionStore.sort}/></Elem> {`使用 ${regionStore.sort[0].toUpperCase()}${regionStore.sort.slice(1)} 排序`}
                 </Elem>
               </Dropdown>
             )}
@@ -101,10 +103,10 @@ export default observer(({
 
       <Oneof value={regionStore.view}>
         <Elem name="regions" case="regions">
-          {count ? <RegionTree regionStore={regionStore}/> : <Elem name="empty">No Regions created yet</Elem>}
+          {count ? <RegionTree regionStore={regionStore}/> : <Elem name="empty">还没有创建标注区域</Elem>}
         </Elem>
         <Elem name="labels" case="labels">
-          {count ? <LabelList regionStore={regionStore}/> : <Elem name="empty">No Labeled Regions created yet</Elem>}
+          {count ? <LabelList regionStore={regionStore}/> : <Elem name="empty">还没有创建已经标记的标注区域</Elem>}
         </Elem>
       </Oneof>
     </Block>

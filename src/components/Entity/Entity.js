@@ -21,7 +21,7 @@ const { Paragraph, Text } = Typography;
 const renderLabels = element => {
   return element.selectedLabels?.length ? (
     <Text key={element.pid} className={styles.labels}>
-      Labels:&nbsp;
+      标签:&nbsp;
       {element.selectedLabels.map(label => {
         const bgColor = label.background || "#000000";
 
@@ -43,14 +43,14 @@ const renderResult = result => {
   } else if (result.type === "textarea" && !(result.from_name.perregion && result.from_name.displaymode === PER_REGION_MODES.REGION_LIST)) {
     return (
       <Paragraph className={styles.row}>
-        <Text>Text: </Text>
+        <Text>文本: </Text>
         <Text mark className={styles.long}>
           {result.mainValue.join("\n")}
         </Text>
       </Paragraph>
     );
   } else if (result.type === "choices") {
-    return <Paragraph>Choices: {result.mainValue.join(", ")}</Paragraph>;
+    return <Paragraph>选择: {result.mainValue.join(", ")}</Paragraph>;
   }
 
   return null;
@@ -137,7 +137,7 @@ export default observer(({ store, annotation }) => {
 
         {node?.meta?.text && (
           <Text>
-            Meta: <Text code>{node.meta.text}</Text>
+            元数据: <Text code>{node.meta.text}</Text>
             &nbsp;
             <DeleteOutlined
               type="delete"
