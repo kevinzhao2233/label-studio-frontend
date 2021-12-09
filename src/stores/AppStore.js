@@ -15,7 +15,7 @@ import messages from "../utils/messages";
 import { guidGenerator } from "../utils/unique";
 import ToolsManager from "../tools/Manager";
 
-const hotkeys = Hotkey("AppStore", "Global Hotkeys");
+const hotkeys = Hotkey("AppStore", "全局快捷键");
 
 export default types
   .model("AppStore", {

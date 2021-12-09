@@ -27,7 +27,7 @@ const ToolView = observer(({ item }) => {
         icon={<IconMagnifyTool />}
         ariaLabel="zoom-in"
         label="放大"
-        shortcut="ctrl+鼠标滚轮"
+        shortcut="ctrl+鼠标滚轮↓"
         onClick={() => {
           item.handleZoom(1);
         }}
@@ -36,7 +36,7 @@ const ToolView = observer(({ item }) => {
         icon={<IconMinifyTool />}
         ariaLabel="zoom-out"
         label="缩小"
-        shortcut="ctrl+鼠标滚轮"
+        shortcut="ctrl+鼠标滚轮↑"
         onClick={() => {
           item.handleZoom(-1);
         }}
