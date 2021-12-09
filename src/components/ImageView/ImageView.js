@@ -688,7 +688,9 @@ export default observer(
 
       const regions = item.regs;
 
-      const containerStyle = {};
+      const containerStyle = {
+        flex: 1,
+      };
 
       let containerClassName = styles.container;
 
@@ -725,7 +727,9 @@ export default observer(
             position: "relative",
             display: "flex",
             alignItems: "flex-start",
-            justifyContent: "space-between",
+            justifyContent: "flex-start",
+            width: '100%',
+            gap: '8px',
           }}
         >
           <div

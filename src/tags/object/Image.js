@@ -19,14 +19,17 @@ import { guidGenerator } from "../../utils/unique";
 
 /**
  * The Image tag shows an image on the page. Use for all image annotation tasks to display an image on the labeling interface.
- *
+ * 自定义的 Image 组件，在页面上展示为 img 标签，所有图像标注任务的图像都是用该组件
  * Use with the following data types: images
  *
  * When you annotate image regions with this tag, the annotations are saved as percentages of the original size of the image, from 0-100.
+ * 当您使用此标签标注图像区域时，Annotations 将保存为图像原始大小的百分比，范围为0-100。
  * @example
  * <!--Labeling configuration to display an image on the labeling interface-->
+ * <!--标记配置，用于在标记界面上显示图像-->
  * <View>
  *   <!-- Retrieve the image url from the url field in JSON or column in CSV -->
+ *   <!-- 从 JSON 中的 url 字段或 CSV 中的列中检索图像 url -->
  *   <Image name="image" value="$url" rotateControl="true" zoomControl="true"></Image>
  * </View>
  * @name Image
@@ -35,7 +38,7 @@ import { guidGenerator } from "../../utils/unique";
  * @param {string} name                       - Name of the element
  * @param {string} value                      - Data field containing a path or URL to the image
  * @param {string=} [width=100%]              - Image width
- * @param {string=} [maxWidth=750px]          - Maximum image width
+ * @param {string=} [maxWidth=750px]           - Maximum image width
  * @param {boolean=} [zoom=false]             - Enable zooming an image with the mouse wheel
  * @param {boolean=} [negativeZoom=false]     - Enable zooming out an image
  * @param {float=} [zoomBy=1.1]               - Scale factor
@@ -46,7 +49,7 @@ import { guidGenerator } from "../../utils/unique";
  * @param {boolean} [brightnessControl=false] - Show brightness control in toolbar
  * @param {boolean} [contrastControl=false]   - Show contrast control in toolbar
  * @param {boolean} [rotateControl=false]     - Show rotate control in toolbar
- * @param {boolean} [crosshair=false]         – Show crosshair cursor
+ * @param {boolean} [crosshair=false]         - Show crosshair cursor
  */
 const TagAttrs = types.model({
   name: types.identifier,
