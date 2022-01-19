@@ -125,6 +125,10 @@ export default observer(({ store }) => {
           <Checkbox checked={store.settings.showLineNumbers} onChange={store.settings.toggleShowLineNumbers}>
             显示文本行号
           </Checkbox>
+          <br />
+          <Checkbox checked={store.settings.preserveSelectedTool} onChange={store.settings.togglepreserveSelectedTool}>
+            Remember Selected Tool
+          </Checkbox>
 
           {/* <br /> */}
           {/* <Checkbox */}
