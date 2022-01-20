@@ -501,8 +501,9 @@ export default observer(
       if (e.evt) {
         const { item } = this.props;
         const stage = item.stageRef;
-
-        item.handleZoom(e.evt.deltaY, stage.getPointerPosition());
+        
+        // MOD 将鼠标滚轮方向取反了
+        item.handleZoom(-e.evt.deltaY, stage.getPointerPosition());
       }
     };
 

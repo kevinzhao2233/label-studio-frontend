@@ -46,6 +46,7 @@
 
 .container {
   overflow: hidden;
+  user-select: none;
 
   &.rotated {
     width: 100%;

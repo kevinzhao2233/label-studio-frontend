@@ -8,7 +8,6 @@ import { Tool } from "../components/Toolbar/Tool";
 import { IconHandTool, IconMagnifyTool, IconMinifyTool } from "../assets/icons";
 
 const ToolView = observer(({ item }) => {
-  console.log({ item });
   return (
     <Fragment>
       <Tool

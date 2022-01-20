@@ -39,7 +39,7 @@ export default inject("store")(
     if (enableHotkeys && enableTooltips) {
       buttons.submit = <Hint> [ Ctrl+Enter ]</Hint>;
       buttons.skip = <Hint> [ Ctrl+Space ]</Hint>;
-      buttons.update = <Hint> [ Alt+Enter] </Hint>;
+      buttons.update = <Hint> [ Ctrl+Enter] </Hint>;
     }
 
     let skipButton;
