@@ -41,6 +41,7 @@ import './App.styl';
 import { Space } from "../../common/Space/Space";
 import { DynamicPreannotationsControl } from "../AnnotationTab/DynamicPreannotationsControl";
 import { isDefined } from "../../utils/utilities";
+import watermark from '../../utils/watermark';
 
 /**
  * App
@@ -98,6 +99,9 @@ class App extends Component {
   }
 
   _renderUI(root, as) {
+    const rootData = getRoot(as);
+
+    console.log({ root, rootData });
     return (
       <>
         {!as.viewingAllAnnotations && !as.viewingAllPredictions && (
@@ -106,7 +110,7 @@ class App extends Component {
             name="main-view"
             onScrollCapture={this._notifyScroll}
           >
-            <Elem name="annotation">
+            <Elem name="annotation" id="watermark">
               {Tree.renderItem(root)}
               {this.renderRelations(as.selected)}
             </Elem>
@@ -233,6 +237,17 @@ class App extends Component {
       this.relationsRef.current.onResize();
     }
   };
+
+  // MOD 增加水印
+  componentDidMount() {
+    const { selected } = this.props.store.annotationStore;
+    const user = selected.user;
+
+    watermark({
+      container: document.querySelector('#watermark'),
+      content: user ? `${user.email} #${user.id}` : 'Admin',
+    });
+  }
 }
 
 export default observer(App);
