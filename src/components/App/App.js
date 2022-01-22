@@ -99,9 +99,9 @@ class App extends Component {
   }
 
   _renderUI(root, as) {
-    const rootData = getRoot(as);
-
-    console.log({ root, rootData });
+    setTimeout(() => {
+      this.handleWatermark();
+    }, 1000);
     return (
       <>
         {!as.viewingAllAnnotations && !as.viewingAllPredictions && (
@@ -239,13 +239,14 @@ class App extends Component {
   };
 
   // MOD 增加水印
-  componentDidMount() {
-    const { selected } = this.props.store.annotationStore;
-    const user = selected.user;
+  handleWatermark() {
+    const user = window?.APP_SETTINGS?.user;
 
+    if (!user) return;
+    
     watermark({
       container: document.querySelector('#watermark'),
-      content: user ? `${user.email} #${user.id}` : 'Admin',
+      content: user.email || 'Admin',
     });
   }
 }
