@@ -15,7 +15,7 @@ const ToolView = observer(({ item }) => {
     <Tool
       active={item.selected}
       ariaLabel="contrast"
-      label="对比度"
+      label="Contrast"
       controlsOnHover
       controls={[
         <Range

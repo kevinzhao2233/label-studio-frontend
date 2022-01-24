@@ -20,7 +20,7 @@ const _Tool = types
       };
     },
     get viewTooltip() {
-      return "关键点";
+      return "Key Point";
     },
     get iconComponent() {
       return self.dynamic

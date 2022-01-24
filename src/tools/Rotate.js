@@ -15,7 +15,7 @@ const ToolView = observer(({ item }) => {
         active={item.selected}
         icon={<IconRotateLeftTool />}
         ariaLabel="rotate-left"
-        label="向左旋转"
+        label="Rotate Left"
         shortcut="alt+left"
         onClick={() => {
           item.rotate(-90);
@@ -25,7 +25,7 @@ const ToolView = observer(({ item }) => {
         active={item.selected}
         icon={<IconRotateRightTool />}
         ariaLabel="rotate-right"
-        label="向右旋转"
+        label="Rotate Right"
         shortcut="alt+right"
         onClick={() => {
           item.rotate(90);

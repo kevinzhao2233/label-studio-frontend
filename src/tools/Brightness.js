@@ -15,7 +15,7 @@ const ToolView = observer(({ item }) => {
     <Tool
       active={item.selected}
       ariaLabel="brightness"
-      label="亮度"
+      label="Brightness"
       controlsOnHover
       controls={[
         <Range

@@ -5,7 +5,6 @@ import Constants from "../core/Constants";
 import * as Colors from "./colors";
 
 // given the imageData object returns the DOM Image with loaded data
-// 给定图像数据对象，返回带有加载数据的 DOM 图像
 function imageData2Image(imagedata) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
