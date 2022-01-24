@@ -12,7 +12,7 @@ export const GroupMenu = ({ regionStore }) => {
           }}
           style={{ width: "135px", display: "flex", justifyContent: "space-between" }}
         >
-          <div>标注区域</div>
+          <div>Regions</div>
         </div>
       </Menu.Item>
       <Menu.Item key="labels">
@@ -24,7 +24,7 @@ export const GroupMenu = ({ regionStore }) => {
           }}
           style={{ width: "135px", display: "flex", justifyContent: "space-between" }}
         >
-          <div>标签</div>
+          <div>Labels</div>
         </div>
       </Menu.Item>
     </Menu>

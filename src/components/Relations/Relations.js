@@ -142,7 +142,7 @@ export default observer(({ store }) => {
     <Block name="relations">
       {/* override LS styles' height */}
       <Elem name="header">
-        <Elem name="title">关联 ({relations.length})</Elem>
+        <Elem name="title">Relations ({relations.length})</Elem>
         {hasRelations && (
           <Button
             size="small"
@@ -165,7 +165,7 @@ export default observer(({ store }) => {
             renderItem={item => <ListItem item={item} />}
           />
         ) : (
-          <p>还未添加关联</p>
+          <p>No Relations added yet</p>
         )}
       </Elem>
     </Block>

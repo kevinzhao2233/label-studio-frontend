@@ -25,7 +25,7 @@ const _Tool = types
         };
       },
       get viewTooltip() {
-        return "矩形";
+        return "Rectangle";
       },
       get iconComponent() {
         return self.dynamic

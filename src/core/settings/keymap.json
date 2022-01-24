@@ -2,23 +2,23 @@
   "audio:back": {
     "key": "ctrl+b",
     "mac": "command+b",
-    "description": "回退一秒"
+    "description": "Back for one second"
   },
   "ts:grow-left":{
     "key": "left",
-    "description": "向左增加标注区域"
+    "description": "Increase region to the left"
   },
   "ts:grow-right":{
     "key": "right",
-    "description": "向右增加标注区域"
+    "description": "Increase region to the right"
   },
   "ts:shrink-left":{
     "key": "alt+left",
-    "description": "减少左边的标注区域"
+    "description": "Decrease region on the left"
   },
   "ts:shrink-right":{
     "key": "alt+right",
-    "description": "减少右边的标注区域"
+    "description": "Decrease region on the right"
   },
   "ts:grow-left-largre": {
     "key": "shift+left"
@@ -35,95 +35,95 @@
   "annotation:submit": {
     "key": "ctrl+enter",
     "mac": "command+enter",
-    "description": "提交标注结果"
+    "description": "Submit annotation"
   },
   "annotation:skip": {
     "key": "ctrl+space",
     "mac": "alt+enter",
-    "description": "跳过任务"
+    "description": "Skip task"
   },
   "annotation:undo": {
     "key": "ctrl+z",
     "mac": "command+z",
-    "description": "撤销"
+    "description": "Undo"
   },
   "annotation:redo": {
     "key": "ctrl+shift+z",
     "mac": "command+shift+z",
-    "description": "重做"
+    "description": "Redo"
   },
   "region:delete-all": {
     "key": "ctrl+backspace",
     "mac": "command+backspace",
-    "description": "删除所有标注区域"
+    "description": "Delete all regions"
   },
   "region:focus": {
     "key": "enter",
-    "description": "聚焦到第一个可聚焦的标注区域"
+    "description": "Focus first focusable region"
   },
   "region:relation": {
     "key": "alt+r",
-    "description": "在标注区域之间创建关联"
+    "description": "Create relation between regions"
   },
   "region:visibility": {
     "key": "alt+h",
-    "description": "是否展示该标注区域"
+    "description": "Toggle selected region visibility"
   },
   "region:unselect": {
     "key": "u",
-    "description": "取消选择"
+    "description": "Unselect region"
   },
   "region:exit": {
     "key": "escape",
-    "description": "退出关联模式，并取消选择"
+    "description": "Exit relation mode, unselect region"
   },
   "region:delete": {
     "key": "backspace",
-    "description": "删除该标注区域"
+    "description": "Delete selected region"
   },
   "region:cycle": {
     "key": "alt+.",
-    "description": "循环标注区域"
+    "description": "Cycle through regions"
   },
   "region:duplicate": {
     "key": "ctrl+d",
     "mac": "command+d",
-    "description": "复制选择的标注区域"
+    "description": "Duplicate selected region"
   },
   "video:playpause": {
     "key": "alt+space",
-    "description": "播放/暂停"
+    "description": "Play/pause video"
   },
   "video:frame-backward": {
     "key": "alt+left",
-    "description": "回退一帧"
+    "description": "Go one frame back"
   },
   "video:keyframe-backward": {
     "key": "ctrl+alt+left",
-    "description": "上一个关键帧"
+    "description": "Go to previous keyframe"
   },
   "video:frame-forward": {
     "key": "alt+right",
-    "description": "前进一帧"
+    "description": "Go one frame forward"
   },
   "video:keyframe-forward": {
     "key": "ctrl+alt+right",
-    "description": "下一个关键帧"
+    "description": "Go to next keyframe"
   },
   "video:backward": {
     "key": "alt+left",
-    "description": "返回"
+    "description": "Go back"
   },
   "video:rewind": {
     "key": "shift+ctrl+alt+left",
-    "description": "到第一帧"
+    "description": "Go to first frame"
   },
   "video:forward": {
     "key": "shift+alt+right",
-    "description": "前进"
+    "description": "Go forward"
   },
   "video:fastforward": {
     "key": "shift+ctrl+alt+right",
-    "description": "到最后一帧"
+    "description": "Go to last frame"
   }
 }

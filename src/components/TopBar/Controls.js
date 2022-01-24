@@ -39,32 +39,32 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
 
   if (isReview) {
     buttons.push(
-      <ButtonTooltip key="reject" title="拒绝标注: [ Ctrl+Space ]">
+      <ButtonTooltip key="reject" title="Reject annotation: [ Ctrl+Space ]">
         <Button  aria-label="reject-annotation" disabled={disabled} look="danger" onClick={store.rejectAnnotation}>
-          拒绝
+          Reject
         </Button>
       </ButtonTooltip>,
     );
 
     buttons.push(
-      <ButtonTooltip key="accept" title="接受标注: [ Ctrl+Enter ]">
+      <ButtonTooltip key="accept" title="Accept annotation: [ Ctrl+Enter ]">
         <Button aria-label="accept-annotation" disabled={disabled} look="primary" onClick={store.acceptAnnotation}>
-          {history.canUndo ? "Fix 并接受" : "接受"}
+          {history.canUndo ? "Fix + Accept" : "Accept"}
         </Button>
       </ButtonTooltip>,
     );
   } else if (annotation.skipped) {
     buttons.push(
       <Elem name="skipped-info" key="skipped">
-        <IconBan color="#d00" /> 已跳过标注
+        <IconBan color="#d00" /> Annotation skipped
       </Elem>,
     );
   } else {
     if (store.hasInterface("skip")) {
       buttons.push(
-        <ButtonTooltip key="skip" title="跳过（取消）该任务: [ Ctrl+Space ]">
+        <ButtonTooltip key="skip" title="Cancel (skip) task: [ Ctrl+Space ]">
           <Button aria-label="skip-task" disabled={disabled} look="danger" onClick={store.skipTask}>
-            跳过
+            Skip
           </Button>
         </ButtonTooltip>,
       );
@@ -72,15 +72,15 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
 
     if ((userGenerate && !sentUserGenerate) || (store.explore && !userGenerate && store.hasInterface("submit"))) {
       const title = submitDisabled
-        ? "项目中不允许有空的标注"
-        : "保存结果: [ Ctrl+Enter ]";
+        ? "Empty annotations denied in this project"
+        : "Save results: [ Ctrl+Enter ]";
       // span is to display tooltip for disabled button
 
       buttons.push(
         <ButtonTooltip key="submit" title={title}>
           <Elem name="tooltip-wrapper">
             <Button aria-label="submit" disabled={disabled || submitDisabled} look="primary" onClick={store.submitAnnotation}>
-              提交
+              Submit
             </Button>
           </Elem>
         </ButtonTooltip>,
@@ -89,9 +89,9 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
 
     if ((userGenerate && sentUserGenerate) || (!userGenerate && store.hasInterface("update"))) {
       buttons.push(
-        <ButtonTooltip key="update" title="提交该任务: [ Alt+Enter ]">
+        <ButtonTooltip key="update" title="Update this task: [ Alt+Enter ]">
           <Button aria-label="submit" disabled={disabled || submitDisabled} look="primary" onClick={store.updateAnnotation}>
-            {sentUserGenerate || versions.result ? "更新" : "提交"}
+            {sentUserGenerate || versions.result ? "Update" : "Submit"}
           </Button>
         </ButtonTooltip>,
       );
