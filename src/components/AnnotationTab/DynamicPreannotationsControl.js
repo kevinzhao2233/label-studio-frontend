@@ -9,7 +9,7 @@ export const DynamicPreannotationsControl = inject("store")(observer(({ store })
       <Input
         type="checkbox"
         checked={store.autoAcceptSuggestions}
-        label="Auto accept annotation suggestions"
+        label="自动接受标注建议"
         onChange={(e) => store.setAutoAcceptSuggestions(e.target.checked)}
         waiting={store.awaitingSuggestions}
         labelProps={{

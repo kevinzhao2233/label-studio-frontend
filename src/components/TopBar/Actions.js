@@ -22,7 +22,7 @@ export const Actions = ({ store }) => {
   return (
     <Elem name="section">
       {store.hasInterface("annotations:view-all") && (
-        <Tooltip title="View all annotations">
+        <Tooltip title="查看所有标注">
           <Button
             icon={<IconViewAll />}
             type="text"
@@ -43,7 +43,7 @@ export const Actions = ({ store }) => {
       {!isPrediction && !isViewAll && store.hasInterface('edit-history') && <EditingHistory entity={entity} />}
 
       {!isViewAll && store.hasInterface("annotations:delete") && (
-        <Tooltip title="Delete annotation">
+        <Tooltip title="删除">
           <Button
             icon={<LsTrash />}
             look="danger"
@@ -51,10 +51,11 @@ export const Actions = ({ store }) => {
             aria-label="Delete"
             onClick={() => {
               confirm({
-                title: "Delete annotaion",
-                body: "This action cannot be undone",
+                title: "删除标注任务",
+                body: "该操作无法撤销",
                 buttonLook: "destructive",
-                okText: "Proceed",
+                okText: "确定",
+                cancelText: "取消",
                 onOk: () => entity.list.deleteAnnotation(entity),
               });
             }}
@@ -68,7 +69,7 @@ export const Actions = ({ store }) => {
       )}
 
       {!isViewAll && store.hasInterface("annotations:add-new") && saved && (
-        <Tooltip title={`Create copy of current ${entity.type}`}>
+        <Tooltip title={`复制当前 ${entity.type}`}>
           <Button
             icon={<IconCopy style={{ width: 36, height: 36 }}/>}
             size="small"
@@ -95,34 +96,37 @@ export const Actions = ({ store }) => {
         </Tooltip>
       )}
 
-      <Button
-        icon={<LsSettings/>}
-        type="text"
-        aria-label="Settings"
-        onClick={() => store.toggleSettings()}
-        style={{
-          height: 36,
-          width: 36,
-          padding: 0,
-        }}
-      />
-
-      {store.description && store.hasInterface('instruction') && (
+      <Tooltip title="设置">
         <Button
-          icon={<IconInfo style={{ width: 16, height: 16 }}/>}
-          primary={store.showingDescription}
+          icon={<LsSettings/>}
           type="text"
-          aria-label="Instructions"
-          onClick={() => store.toggleDescription()}
+          aria-label="Settings"
+          onClick={() => store.toggleSettings()}
           style={{
             height: 36,
             width: 36,
             padding: 0,
           }}
         />
+      </Tooltip>
+
+      {store.description && store.hasInterface('instruction') && (
+        <Tooltip title="描述信息">
+          <Button
+            icon={<IconInfo style={{ width: 16, height: 16 }}/>}
+            primary={store.showingDescription}
+            type="text"
+            aria-label="Instructions"
+            onClick={() => store.toggleDescription()}
+            style={{
+              height: 36,
+              width: 36,
+              padding: 0,
+            }}
+          />
+        </Tooltip>
+        
       )}
     </Elem>
   );
 };
-
-

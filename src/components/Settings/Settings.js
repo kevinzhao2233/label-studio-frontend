@@ -10,8 +10,8 @@ import { triggerResizeEvent } from "../../utils/utilities";
 
 const HotkeysDescription = () => {
   const columns = [
-    { title: "Shortcut", dataIndex: "combo", key: "combo" },
-    { title: "Description", dataIndex: "descr", key: "descr" },
+    { title: "快捷键", dataIndex: "combo", key: "combo" },
+    { title: "描述", dataIndex: "descr", key: "descr" },
   ];
 
   const keyNamespaces = Hotkey.namespaces();
@@ -53,20 +53,20 @@ export default observer(({ store }) => {
   return (
     <Modal
       visible={store.showingSettings}
-      title="Settings"
+      title="设置"
       bodyStyle={{ paddingTop: "0" }}
       footer=""
       onCancel={store.toggleSettings}
     >
       <Tabs defaultActiveKey="1">
-        <Tabs.TabPane tab="General" key="1">
+        <Tabs.TabPane tab="通用" key="1">
           <Checkbox
             checked={store.settings.enableHotkeys}
             onChange={() => {
               store.settings.toggleHotkeys();
             }}
           >
-            Enable labeling hotkeys
+            启用快捷键进行标记
           </Checkbox>
           <br />
           <Checkbox
@@ -75,7 +75,7 @@ export default observer(({ store }) => {
               store.settings.toggleTooltips();
             }}
           >
-            Show hotkey tooltips
+            显示快捷键提示
           </Checkbox>
           <br />
           <Checkbox
@@ -84,7 +84,7 @@ export default observer(({ store }) => {
               store.settings.toggleLabelTooltips();
             }}
           >
-            Show labels hotkey tooltips
+            显示标签上的快捷键提示
           </Checkbox>
           <br />
           <Checkbox
@@ -93,7 +93,7 @@ export default observer(({ store }) => {
               store.settings.toggleShowLabels();
             }}
           >
-            Show labels inside the regions
+            在选区内显示标签
           </Checkbox>
           {/* <br/> */}
           {/* <Checkbox */}
@@ -113,21 +113,21 @@ export default observer(({ store }) => {
               store.settings.toggleContinuousLabeling();
             }}
           >
-            Keep label selected after creating a region
+            创建选区后保持标签被选中（选择某个标签后一直标记该标签的目标，则很有用）
           </Checkbox>
 
           <br />
           <Checkbox checked={store.settings.selectAfterCreate} onChange={store.settings.toggleSelectAfterCreate}>
-            Select regions after creating
+          创建选区后选中选区（创建选区后需要立即在侧边栏操作，则很有用）
           </Checkbox>
 
           <br />
           <Checkbox checked={store.settings.showLineNumbers} onChange={store.settings.toggleShowLineNumbers}>
-            Show line numbers for Text
+            显示文本行号
           </Checkbox>
           <br />
           <Checkbox checked={store.settings.preserveSelectedTool} onChange={store.settings.togglepreserveSelectedTool}>
-            Remember Selected Tool
+            保持已选择的工具
           </Checkbox>
 
           {/* <br /> */}
@@ -146,10 +146,10 @@ export default observer(({ store }) => {
           {/*     Save every <InputNumber size="small" min={5} max={120} /> seconds */}
           {/*   </div> } */}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Hotkeys" key="2">
+        <Tabs.TabPane tab="快捷键" key="2">
           <HotkeysDescription />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Layout" key="3">
+        <Tabs.TabPane tab="布局" key="3">
           <Checkbox
             checked={store.settings.bottomSidePanel}
             onChange={() => {
@@ -157,12 +157,12 @@ export default observer(({ store }) => {
               setTimeout(triggerResizeEvent);
             }}
           >
-            Move sidepanel to the bottom
+            将侧边栏停靠到底部
           </Checkbox>
 
           <br />
           <Checkbox checked={store.settings.displayLabelsByDefault} onChange={store.settings.toggleSidepanelModel}>
-            Display Labels by default in Results panel
+            结果面板中默认显示标签而非选区
           </Checkbox>
 
           <br />
@@ -173,7 +173,7 @@ export default observer(({ store }) => {
               store.settings.toggleAnnotationsPanel();
             }}
           >
-            Show Annotations panel
+            显示 Annotations 面板
           </Checkbox>
           <br />
           <Checkbox
@@ -183,7 +183,7 @@ export default observer(({ store }) => {
               store.settings.togglePredictionsPanel();
             }}
           >
-            Show Predictions panel
+            显示预测面板
           </Checkbox>
 
           {/* <br/> */}

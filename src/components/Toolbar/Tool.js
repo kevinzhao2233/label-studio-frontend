@@ -7,7 +7,7 @@ import { ToolbarContext } from "./ToolbarContext";
 
 const hotkeys = Hotkey(
   "SegmentationToolbar",
-  "Segmentation Tools",
+  "局部快捷键",
 );
 
 const keysDictionary = {

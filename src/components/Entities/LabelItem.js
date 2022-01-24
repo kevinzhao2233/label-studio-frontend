@@ -26,7 +26,8 @@ export const LabelItem = observer(({ item, regions, regionStore }) => {
             </Label>
           ) : <>Not labeled</>}
           <Elem name="counter">
-            {`${count} Region${(count === 0 || count > 1) ? "s" : ""}`}
+            {/* {`${count} Region${(count === 0 || count > 1) ? "s" : ""}`} */}
+            {`${count} 标注区域`}
           </Elem>
         </Elem>
         <Elem
