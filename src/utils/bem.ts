@@ -123,6 +123,7 @@ const assembleClass = (block: string, elem?: string, mix?: CNMix | CNMix[], mod?
 
 const BlockContext = createContext<CN | null>(null);
 
+// cn 应该就是 className 的意思，这里就是对 className 进行组装的过程
 export const cn = (block: string, options: CNOptions = {}): CN => {
   const { elem, mix, mod } = options ?? {};
   const blockName = block;
@@ -190,7 +191,7 @@ export const cn = (block: string, options: CNOptions = {}): CN => {
 
 export const BemWithSpecifiContext = (context?: Context<CN | null>) => {
   const Context = context ?? createContext<CN|null>(null);
-
+  // forwordRef 是用来转发 ref 的，第一个参数是 props，第二个参数是父组件传递来的 ref
   const Block = forwardRef(<T extends FC<any>, D extends TagNames>({
     tag = 'div',
     name,

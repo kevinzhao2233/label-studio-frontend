@@ -14,5 +14,5 @@ const compiler = webpack(config);
 const server = new WebpackDevServer(config.devServer, compiler);
 
 server.startCallback(() => {
-  console.log(`dev server listening on port ${config.devServer.port}`);
+  console.log(`\ndev server listening on port ${config.devServer.port}`);
 });
