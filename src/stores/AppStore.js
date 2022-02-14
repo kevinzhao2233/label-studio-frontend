@@ -429,7 +429,8 @@ export default types
     // Set `isSubmitting` flag to block [Submit] and related buttons during request
     // to prevent from sending duplicating requests.
     // Better to return request's Promise from SDK to make this work perfect.
-    function handleSubmittingFlag(fn, defaultMessage = "Error during submit") {
+    // 提交时防止双击、设置延迟
+    function handleSubmittingFlag(fn, defaultMessage = "提交时出现错误") {
       self.setFlags({ isSubmitting: true });
       const res = fn();
       // Wait for request, max 5s to not make disabled forever broken button;
