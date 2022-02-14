@@ -6,6 +6,9 @@ import { isDefined } from "../../utils/utilities";
 import { IconBan } from "../../assets/icons";
 
 import "./Controls.styl";
+import { useCallback, useMemo, useState } from "react";
+import { Dropdown } from "../../common/Dropdown/DropdownComponent";
+import { FF_DEV_1593, isFF } from "../../utils/feature-flags";
 
 const TOOLTIP_DELAY = 0.8;
 
@@ -28,6 +31,48 @@ const controlsInjector = inject(({ store }) => {
   };
 });
 
+const RejectDialog = ({ disabled, store }) => {
+  const [show, setShow] = useState(false);
+  const [comment, setComment] = useState('');
+  const onReject = useCallback(() => {
+    store.rejectAnnotation({ comment: comment.length ? comment : null });
+    setShow(false);
+    setComment('');
+  });
+
+  return (
+    <Dropdown.Trigger
+      visible={show}
+      toggle={() => { }}
+      onToggle={(visible) => {
+        setShow(visible);
+      }}
+      content={(
+        <Block name="reject-dialog">
+          <Elem name="input-title">
+            拒绝原因
+          </Elem>
+          <Elem
+            name='input'
+            tag={'textarea'}
+            type="text"
+            value={comment}
+            onChange={(event) => { setComment(event.target.value); }}
+          />
+          <Elem name='footer' >
+            <Button onClick={() => setShow(false)}>Cancel</Button>
+            <Button style={{ marginLeft: 8 }} look="danger" onClick={onReject}>Reject</Button>
+          </Elem >
+        </Block >
+      )}
+    >
+      <Button aria-label="reject-annotation" disabled={disabled} look="danger">
+        Reject
+      </Button>
+    </Dropdown.Trigger >
+  );
+};
+
 export const Controls = controlsInjector(observer(({ store, history, annotation }) => {
   const isReview = store.hasInterface("review");
   const historySelected = isDefined(store.annotationStore.selectedHistory);
@@ -37,19 +82,27 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
   const disabled = store.isSubmitting || historySelected;
   const submitDisabled = store.hasInterface("annotations:deny-empty") && results.length === 0;
 
+  const RejectButton = useMemo(() => {
+    if (isFF(FF_DEV_1593)) {
+      return <RejectDialog disabled={disabled} store={store} />;
+    } else {
+      return (
+        <ButtonTooltip key="reject" title="拒绝该标注结果: [ Ctrl+Space ]">
+          <Button aria-label="reject-annotation" disabled={disabled} look="danger" onClick={store.rejectAnnotation}>
+            拒绝
+          </Button>
+        </ButtonTooltip>
+      );
+    }
+  }, [disabled, store]);
+
   if (isReview) {
-    buttons.push(
-      <ButtonTooltip key="reject" title="拒绝标注: [ Ctrl+Space ]">
-        <Button aria-label="reject-annotation" disabled={disabled} look="danger" onClick={store.rejectAnnotation}>
-          拒绝
-        </Button>
-      </ButtonTooltip>,
-    );
+    buttons.push(RejectButton);
 
     buttons.push(
       <ButtonTooltip key="accept" title="接受标注: [ Ctrl+Enter ]">
         <Button aria-label="accept-annotation" disabled={disabled} look="primary" onClick={store.acceptAnnotation}>
-          {history.canUndo ? "Fix 并接受" : "接受"}
+          {history.canUndo ? "修复并接受" : "接受"}
         </Button>
       </ButtonTooltip>,
     );
