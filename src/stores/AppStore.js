@@ -459,6 +459,7 @@ export default types
       entity.dropDraft();
     }
 
+    // 更新
     function updateAnnotation() {
       if (self.isSubmitting) return;
 
@@ -475,16 +476,18 @@ export default types
       !entity.sentUserGenerate && entity.sendUserGenerate();
     }
 
+    // 跳过任务
     function skipTask() {
       handleSubmittingFlag(() => {
         getEnv(self).events.invoke('skipTask', self);
-      }, "Error during skip, try again");
+      }, "执行跳过时失败，请重试");
     }
 
+    // 取消跳过
     function cancelSkippingTask() {
       handleSubmittingFlag(() => {
         getEnv(self).events.invoke('cancelSkippingTask', self);
-      }, "Error during cancel skipping task, try again");
+      }, "执行取消跳过时失败，请重试");
     }
 
     function acceptAnnotation() {
