@@ -199,8 +199,9 @@ const devServer = () => {
         index: "./public/index.html",
       },
       client: {
-        overlay: false,
-      }
+        logging: 'error',
+        progress: true,
+      },
     }
   } : {};
 };

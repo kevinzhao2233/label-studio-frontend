@@ -64,7 +64,7 @@ import { TimeSeriesSingle } from "../examples/timeseries_single";
  */
 // import { AllTypes } from "../examples/all_types";
 
-const data = ImageTools;
+const data = NamedEntity;
 
 function getData(task) {
   if (task && task.data) {

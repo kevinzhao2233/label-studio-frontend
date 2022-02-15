@@ -49,6 +49,7 @@ import { Annotation } from "./Annotation";
  */
 class App extends Component {
   relationsRef = React.createRef();
+  annotationRootWrapperRef = React.createRef();
 
   renderSuccess() {
     return <Result status="success" title={getEnv(this.props.store).messages.DONE} />;
@@ -111,7 +112,7 @@ class App extends Component {
             name="main-view"
             onScrollCapture={this._notifyScroll}
           >
-            <Elem name="annotation" id="watermark">
+            <Elem name="annotation" ref={this.annotationRootWrapperRef}>
               {<Annotation root={root} annotation={as.selected} />}
               {this.renderRelations(as.selected)}
             </Elem>
@@ -205,7 +206,7 @@ class App extends Component {
 
           {isDefined(store) && store.hasInterface('topbar') && <TopBar store={store}/>}
           <div className={stCommon}>
-            <div className={mainContainerClass.join(" ")}>
+            <div className={mainContainerClass.join(" ")} >
               {as.validation === null
                 ? this._renderUI(as.selectedHistory?.root ?? root, as)
                 : this.renderConfigValidationException(store)}
@@ -243,12 +244,20 @@ class App extends Component {
   handleWatermark() {
     const user = window?.APP_SETTINGS?.user;
 
-    if (!user) return;
-    
-    watermark({
-      container: document.querySelector('#watermark'),
-      content: user.email || 'Admin',
-    });
+    try {
+      watermark({
+        container: this.annotationRootWrapperRef.current,
+        content: user?.email || 'Admin',
+      });
+    } catch (error) {
+      console.error('水印渲染出错：', error);
+    }
+  }
+
+  componentDidMount() {
+    if(this.annotationRootWrapperRef.current) {
+      this.annotationRootWrapperRef.current.oncopy = () => false;
+    }
   }
 }
 

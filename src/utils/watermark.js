@@ -3,11 +3,11 @@
 export default function __canvasWM({
   container = document.body,
   width = '200px',
-  height = '200px',
+  height = '160px',
   textAlign = 'center',
   textBaseline = 'middle',
   font = "12px Heiti",
-  fillStyle = 'rgba(184, 184, 184, 0.3)',
+  fillStyle = 'rgba(184, 184, 184, 0.35)',
   content = '请勿外传',
   rotate = '20',
   zIndex = 999999,
@@ -24,7 +24,7 @@ export default function __canvasWM({
   ctx.font = font;
   ctx.fillStyle = fillStyle;
   ctx.rotate(Math.PI / 180 * rotate);
-  ctx.fillText(content, parseFloat(width) / 2, parseFloat(height) / 2);
+  ctx.fillText(content, parseFloat(width) / 3, parseFloat(height) / 10);
 
   const base64Url = canvas.toDataURL();
   const __wm = document.querySelector('.__wm');
