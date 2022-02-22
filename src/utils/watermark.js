@@ -48,26 +48,26 @@ export default function __canvasWM({
     container.style.position = 'relative';
     container.insertBefore(watermarkDiv, container.firstChild);
   }
-    
-  const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-  if (MutationObserver) {
-    let mo = new MutationObserver(function() {
-      const __wm = document.querySelector('.__wm');
+  // const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+
+  // if (MutationObserver) {
+  //   let mo = new MutationObserver(function() {
+  //     const __wm = document.querySelector('.__wm');
       
-      // 只在__wm元素变动才重新调用 __canvasWM
-      if ((__wm && __wm.getAttribute('style') !== styleStr) || !__wm) {
-        // 避免一直触发
-        mo.disconnect();
-        mo = null;
-        __canvasWM(args);
-      }
-    });
+  //     // 只在__wm元素变动才重新调用 __canvasWM
+  //     if ((__wm && __wm.getAttribute('style') !== styleStr) || !__wm) {
+  //       // 避免一直触发
+  //       mo.disconnect();
+  //       mo = null;
+  //       __canvasWM(args);
+  //     }
+  //   });
 
-    mo.observe(container, {
-      attributes: true,
-      subtree: true,
-      childList: true,
-    });
-  }
+  //   mo.observe(container, {
+  //     attributes: true,
+  //     subtree: true,
+  //     childList: true,
+  //   });
+  // }
 }
