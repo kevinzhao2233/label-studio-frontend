@@ -75,7 +75,7 @@ class App extends Component {
         </Elem>
         {store.hasInterface('infobar') && (
           <Elem name="infobar">
-            Task #{store.task.id}
+            任务 #{store.task.id}
           </Elem>
         )}
       </Block>
@@ -131,11 +131,23 @@ class App extends Component {
   _renderInfobar(as) {
     const { id, queue } = getRoot(as).task;
 
+    const project = getRoot(as).project;
+
+    // console.log('lsf-app.js', { project });
+
     return (
       <Elem name="infobar" tag={Space} size="small">
-        <span>Task #{id}</span>
+        <span>任务 ID #{id ?? '--'}</span>
 
         {queue && <span>{queue}</span>}
+
+        {/* MOD 添加任务描述 */}
+        <span style={{ display: "flex", marginLeft: "32px", alignItems: "center" }}>
+          <Space size="compact" style={{ gridGap: '8px' }}>
+            {/* <span>总任务: {project.task_count}</span>
+            <span>已标注: {project.annotation_count}</span> */}
+          </Space>
+        </span>
       </Elem>
     );
   }

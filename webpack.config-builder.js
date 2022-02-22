@@ -201,6 +201,10 @@ const devServer = () => {
       client: {
         logging: 'error',
         progress: true,
+        overlay: {
+          errors: true,
+          warnings: false,
+        },
       },
     }
   } : {};

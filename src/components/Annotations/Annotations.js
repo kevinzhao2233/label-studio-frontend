@@ -17,20 +17,20 @@ import styles from "./Annotations.module.scss";
 
 export const DraftPanel = observer(({ item }) => {
   if (!item.draftSaved && !item.versions.draft) return null;
-  const saved = item.draft && item.draftSaved ? ` saved ${Utils.UDate.prettyDate(item.draftSaved)}` : "";
+  const saved = item.draft && item.draftSaved ? ` 保存 ${Utils.UDate.prettyDate(item.draftSaved)}` : "";
 
   if (!item.selected) {
     if (!item.draft) return null;
     return <div>draft{saved}</div>;
   }
   if (!item.versions.result || !item.versions.result.length) {
-    return <div>{saved ? `draft${saved}` : "not submitted draft"}</div>;
+    return <div>{saved ? `草稿 ${saved}` : "没有提交的草稿"}</div>;
   }
   return (
     <div>
-      <Tooltip placement="topLeft" title={item.draftSelected ? "switch to submitted result" : "switch to current draft"}>
+      <Tooltip placement="topLeft" title={item.draftSelected ? "切换到已提交的结果" : "切换到当前草稿"}>
         <Button type="link" onClick={item.toggleDraft} className={styles.draftbtn}>
-          {item.draftSelected ? "draft" : "submitted"}
+          {item.draftSelected ? "草稿" : "已提交"}
         </Button>
       </Tooltip>
       {saved}
@@ -40,7 +40,7 @@ export const DraftPanel = observer(({ item }) => {
 
 const Annotation = observer(({ item, store }) => {
   const removeHoney = () => (
-    <Tooltip placement="topLeft" title="Unset this result as a ground truth">
+    <Tooltip placement="topLeft" title="取消设置该结果为 ground truth">
       <Button
         size="small"
         type="primary"
@@ -56,8 +56,8 @@ const Annotation = observer(({ item, store }) => {
 
   const setHoney = () => {
     const title = item.ground_truth
-      ? "Unset this result as a ground truth"
-      : "Set this result as a ground truth";
+      ? "取消设置该结果为 ground truth"
+      : "将此结果设置为 ground truth";
 
     return (
       <Tooltip placement="topLeft" title={title}>
@@ -149,14 +149,14 @@ const Annotation = observer(({ item, store }) => {
         {store.hasInterface("ground-truth") && (item.ground_truth ? removeHoney() : setHoney())}
         &nbsp;
         {store.hasInterface("annotations:delete") && (
-          <Tooltip placement="topLeft" title="Delete selected annotation">
+          <Tooltip placement="topLeft" title="删除选择的标注信息">
             <Popconfirm
               placement="bottomLeft"
-              title={"Please confirm you want to delete this annotation"}
+              title={"确认删除该标注信息？"}
               onConfirm={confirm}
-              okText="Delete"
+              okText="删除"
               okType="danger"
-              cancelText="Cancel"
+              cancelText="取消"
             >
               <Button size="small" danger style={{ background: "transparent" }}>
                 <DeleteOutlined />
@@ -191,7 +191,7 @@ const Annotation = observer(({ item, store }) => {
         </div>
         {/* platform uses was_cancelled so check both */}
         {store.hasInterface("skip") && (item.skipped || item.was_cancelled) && (
-          <Tooltip placement="topLeft" title="Skipped annotation">
+          <Tooltip placement="topLeft" title="跳过的标注">
             <StopOutlined className={styles.skipped} />
           </Tooltip>
         )}
@@ -218,7 +218,7 @@ class Annotations extends Component {
 
         <div style={{ marginRight: "1px" }}>
           {store.hasInterface("annotations:add-new") && (
-            <Tooltip placement="topLeft" title="Create a new annotation">
+            <Tooltip placement="topLeft" title="创建一个新的标注信息">
               <Button
                 size="small"
                 onClick={ev => {
@@ -234,7 +234,7 @@ class Annotations extends Component {
             </Tooltip>
           )}
           &nbsp;
-          <Tooltip placement="topLeft" title="View all annotations">
+          <Tooltip placement="topLeft" title="展示所有标注信息">
             <Button
               size="small"
               type={store.annotationStore.viewingAllAnnotations ? "primary" : ""}

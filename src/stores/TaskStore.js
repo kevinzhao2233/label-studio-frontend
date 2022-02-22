@@ -23,6 +23,7 @@ const TaskStore = types
     /**
      * Data of task, may contain an object but in App Store will be transformed into string
      * MST doesn't support processing of dynamic objects with unkown keys value
+     * 本应该是一个对象，但是 MST 不支持未知键值对的对象，所以转换成字符串了
      */
     data: types.maybeNull(types.string),
     queue: types.optional(types.maybeNull(types.string), null),

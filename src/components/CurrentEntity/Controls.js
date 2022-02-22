@@ -42,7 +42,7 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
     buttons.push(
       <ButtonTooltip key="reject" name="annotation:skip" title="Reject annotation">
         <Button disabled={disabled} look="danger" onClick={store.rejectAnnotation}>
-          Reject
+          拒绝
         </Button>
       </ButtonTooltip>,
     );
@@ -57,7 +57,7 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
   } else if (annotation.skipped) {
     buttons.push(
       <Elem name="skipped-info" key="skipped">
-        <IconBan color="#d00" /> Annotation skipped
+        <IconBan color="#d00" /> 该标注已经跳过
       </Elem>,
     );
   } else {
@@ -65,7 +65,7 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
       buttons.push(
         <ButtonTooltip key="skip" name="annotation:skip" title="Cancel (skip) task">
           <Button disabled={disabled} look="danger" onClick={store.skipTask}>
-            Skip
+            跳过
           </Button>
         </ButtonTooltip>,
       );
@@ -73,15 +73,15 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
 
     if ((userGenerate && !sentUserGenerate) || (store.explore && !userGenerate && store.hasInterface("submit"))) {
       const title = submitDisabled
-        ? "Empty annotations denied in this project"
-        : "Save results";
+        ? "此项目中不允许空的注释"
+        : "保存结果";
       // span is to display tooltip for disabled button
 
       buttons.push(
         <ButtonTooltip key="submit" name="annotation:submit" title={title}>
           <Elem name="tooltip-wrapper">
             <Button disabled={disabled || submitDisabled} look="primary" onClick={store.submitAnnotation}>
-              Submit
+              提交
             </Button>
           </Elem>
         </ButtonTooltip>,
@@ -90,9 +90,9 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
 
     if ((userGenerate && sentUserGenerate) || (!userGenerate && store.hasInterface("update"))) {
       buttons.push(
-        <ButtonTooltip key="update" name="annotation:submit" title="Update this task">
+        <ButtonTooltip key="update" name="annotation:submit" title="更新当前任务">
           <Button disabled={disabled || submitDisabled} look="primary" onClick={store.updateAnnotation}>
-            {sentUserGenerate || versions.result ? "Update" : "Submit"}
+            {sentUserGenerate || versions.result ? "更新" : "提交"}
           </Button>
         </ButtonTooltip>,
       );
