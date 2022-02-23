@@ -309,7 +309,7 @@ const Crosshair = memo(forwardRef(({ width, height }, ref) => {
         <Line
           name="v-black"
           points={pointsH}
-          stroke="#000"
+          stroke="#f00"
           strokeWidth={strokeWidth}
           dash={dashStyle}
           strokeScaleEnabled={enableStrokeScale}
@@ -326,7 +326,7 @@ const Crosshair = memo(forwardRef(({ width, height }, ref) => {
         <Line
           name="h-black"
           points={pointsV}
-          stroke="#000"
+          stroke="#f00"
           strokeWidth={strokeWidth}
           dash={dashStyle}
           strokeScaleEnabled={enableStrokeScale}
