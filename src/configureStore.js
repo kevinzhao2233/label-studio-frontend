@@ -8,6 +8,7 @@ const getEnvironment = async () => {
   return (await import("./env/production")).default;
 };
 
+// params 中包含 defaultOptions 和从 dm 中传递来的 options
 export const configureStore = async (params, events) => {
   if (params.options?.secureMode) window.LS_SECURE_MODE = true;
 
@@ -27,6 +28,10 @@ export const configureStore = async (params, events) => {
     params.taskHistory = [{ taskId: params.task.id, annotationId: null }];
   }
 
+  params.project = {
+    id: +params.projectId,
+  };
+
   const store = AppStore.create(params, {
     ...env.configureApplication(params),
     events,
@@ -37,6 +42,10 @@ export const configureStore = async (params, events) => {
     users: params.users ?? [],
     annotationHistory: params.history ?? [],
   });
+
+  store.project.id && await store.project.updateProjectData();
+
+  console.log('LSF AppStore 初始化成功', { store });
 
   return { store, getRoot: env.rootElement };
 };

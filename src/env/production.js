@@ -66,6 +66,7 @@ function configureApplication(params) {
     onCancelSkippingTask: params.onCancelSkippingTask ? params.onCancelSkippingTask : External.onCancelSkippingTask,
     onSubmitDraft: params.onSubmitDraft,
     onTaskLoad: params.onTaskLoad || External.onTaskLoad,
+    onProjectFetch: params.onProjectFetch || External.onProjectFetch,
     onLabelStudioLoad: params.onLabelStudioLoad || External.onLabelStudioLoad,
     onEntityCreate: params.onEntityCreate || External.onEntityCreate,
     onEntityDelete: params.onEntityDelete || External.onEntityDelete,

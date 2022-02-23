@@ -92,7 +92,7 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
       buttons.push(
         <ButtonTooltip key="update" name="annotation:submit" title="更新当前任务">
           <Button disabled={disabled || submitDisabled} look="primary" onClick={store.updateAnnotation}>
-            {sentUserGenerate || versions.result ? "更新" : "提交"}
+            {sentUserGenerate || versions.result ? "新" : "提交"}
           </Button>
         </ButtonTooltip>,
       );

@@ -43,6 +43,7 @@ export default types
 
     /**
      * Configure the visual UI shown to the user
+     * 在 UI 上展示哪些功能
      */
     interfaces: types.array(types.string),
 
@@ -235,6 +236,7 @@ export default types
 
     /**
      * Function
+     * 创建成功的回调
      */
     function afterCreate() {
       ToolsManager.setRoot(self);
@@ -247,6 +249,7 @@ export default types
       getEnv(self).events.invoke('labelStudioLoad', self);
     }
 
+    // 绑定快捷键
     function attachHotkeys() {
       // Unbind previous keys in case LS was re-initialized
       hotkeys.unbindAll();
@@ -372,6 +375,7 @@ export default types
       });
 
       // duplicate selected regions
+      // 复制选择的区域
       hotkeys.addNamed("region:duplicate", (e) => {
         const { selected } = self.annotationStore;
         const { serializedSelection } = selected || {};
@@ -419,6 +423,7 @@ export default types
     }
     /* eslint-enable no-unused-vars */
 
+    // 提交草稿
     function submitDraft(c) {
       return new Promise(resolve => {
         const events = getEnv(self).events;
@@ -446,6 +451,7 @@ export default types
         .then(() => self.setFlags({ isSubmitting: false }));
     }
 
+    // 提交
     function submitAnnotation() {
       if (self.isSubmitting) return;
 
@@ -458,7 +464,10 @@ export default types
 
       entity.sendUserGenerate();
       handleSubmittingFlag(async () => {
+        // getEnv() 用来获取 store 的环境，内容的话就是 configureApplication 方法中 options
         await getEnv(self).events.invoke(event, self, entity);
+        // 更新项目的数据
+        self.project.id && await self?.project.updateProjectData();
       });
       entity.dropDraft();
     }
@@ -475,6 +484,8 @@ export default types
 
       handleSubmittingFlag(async () => {
         await getEnv(self).events.invoke('updateAnnotation', self, entity);
+        // 更新项目的数据
+        self.project.id && await self?.project.updateProjectData();
       });
       entity.dropDraft();
       !entity.sentUserGenerate && entity.sendUserGenerate();

@@ -148,7 +148,7 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
 
     if ((userGenerate && sentUserGenerate) || (!userGenerate && store.hasInterface("update"))) {
       buttons.push(
-        <ButtonTooltip key="update" title="提交该任务: [ Alt+Enter ]">
+        <ButtonTooltip key="update" title="提交该任务: [ Ctrl+Enter ]">
           <Button aria-label="submit" disabled={disabled || submitDisabled} look="primary" onClick={store.updateAnnotation}>
             {sentUserGenerate || versions.result ? "更新" : "提交"}
           </Button>

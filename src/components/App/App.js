@@ -1,7 +1,7 @@
 /**
  * Libraries
  */
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { Result, Spin } from "antd";
 import { getEnv, getRoot } from "mobx-state-tree";
 import { observer, Provider } from "mobx-react";
@@ -133,21 +133,21 @@ class App extends Component {
 
     const project = getRoot(as).project;
 
-    // console.log('lsf-app.js', { project });
-
     return (
       <Elem name="infobar" tag={Space} size="small">
         <span>任务 ID #{id ?? '--'}</span>
 
-        {queue && <span>{queue}</span>}
+        {queue && <span style={{ marginLeft: "24px" }}>抽样方式：{queue}</span>}
 
         {/* MOD 添加任务描述 */}
-        <span style={{ display: "flex", marginLeft: "32px", alignItems: "center" }}>
-          <Space size="compact" style={{ gridGap: '8px' }}>
-            {/* <span>总任务: {project.task_count}</span>
-            <span>已标注: {project.annotation_count}</span> */}
-          </Space>
-        </span>
+        {project.data && (
+          <span style={{ display: "flex", marginLeft: "24px", alignItems: "center" }}>
+            <Space size="compact" style={{ gridGap: '8px' }}>
+              <span>任务: {project?.data?.taskCount}</span>
+              <span>标注结果: {project?.data?.annotationCount}</span>
+            </Space>
+          </span>
+        )}
       </Elem>
     );
   }

@@ -32,6 +32,11 @@ function onCancelSkippingTask() {}
 function onTaskLoad() {}
 
 /**
+ * 获取project
+ */
+function onProjectFetch() {}
+
+/**
  * Callback on Label Studio load
  */
 function onLabelStudioLoad() {}
@@ -88,6 +93,7 @@ export default {
   onSubmitAnnotation,
   onSubmitDraft,
   onTaskLoad,
+  onProjectFetch,
   onUpdateAnnotation,
   onSelectAnnotation,
   onAcceptAnnotation,
