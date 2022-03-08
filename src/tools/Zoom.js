@@ -5,7 +5,7 @@ import { types } from "mobx-state-tree";
 import BaseTool from "./Base";
 import ToolMixin from "../mixins/Tool";
 import { Tool } from "../components/Toolbar/Tool";
-import { IconHandTool, IconMagnifyTool, IconMinifyTool } from "../assets/icons";
+import { IconHandTool, IconZoomIn, IconZoomOut } from "../assets/icons";
 
 const ToolView = observer(({ item }) => {
   return (
@@ -23,7 +23,7 @@ const ToolView = observer(({ item }) => {
         }}
       />
       <Tool
-        icon={<IconMagnifyTool />}
+        icon={<IconZoomIn />}
         ariaLabel="zoom-in"
         label="放大"
         shortcut="ctrl+鼠标滚轮↓"
@@ -32,7 +32,7 @@ const ToolView = observer(({ item }) => {
         }}
       />
       <Tool
-        icon={<IconMinifyTool />}
+        icon={<IconZoomOut />}
         ariaLabel="zoom-out"
         label="缩小"
         shortcut="ctrl+鼠标滚轮↑"

@@ -4,6 +4,9 @@
     "mac": "command+b",
     "description": "回退一秒"
   },
+  "audio:playpause": {
+
+  },
   "ts:grow-left":{
     "key": "left",
     "description": "向左增加标注区域"
@@ -90,21 +93,21 @@
     "mac": "command+d",
     "description": "复制选择的标注区域"
   },
-  "video:playpause": {
+  "media:playpause": {
     "key": "alt+space",
     "description": "播放/暂停"
   },
-  "video:frame-backward": {
+  "media:step-backward": {
     "key": "alt+left",
-    "description": "回退一帧"
+    "description": "回退一步"
+  },
+  "media:step-forward": {
+    "key": "alt+right",
+    "description": "向前一步"
   },
   "video:keyframe-backward": {
     "key": "ctrl+alt+left",
     "description": "上一个关键帧"
-  },
-  "video:frame-forward": {
-    "key": "alt+right",
-    "description": "前进一帧"
   },
   "video:keyframe-forward": {
     "key": "ctrl+alt+right",
