@@ -129,7 +129,7 @@ class App extends Component {
   }
 
   _renderInfobar(as) {
-    const { id, queue } = getRoot(as).task;
+    const { id, queue, cancelledAnnotations } = getRoot(as).task;
 
     const project = getRoot(as).project;
 
@@ -146,6 +146,13 @@ class App extends Component {
               <span>任务: {project?.data?.taskCount}</span>
               <span>标注结果: {project?.data?.annotationCount}</span>
             </Space>
+          </span>
+        )}
+
+        {/* MOD 添加任务是否被跳过 */}
+        {project.data && !!cancelledAnnotations && (
+          <span style={{ marginLeft: "24px" }}>
+            <span>当前任务跳过次数: { cancelledAnnotations }</span>
           </span>
         )}
       </Elem>

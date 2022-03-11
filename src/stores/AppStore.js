@@ -396,6 +396,7 @@ export default types
       if (taskObject && !Utils.Checkers.isString(taskObject.data)) {
         taskObject = {
           ...taskObject,
+          cancelledAnnotations: taskObject.cancelled_annotations,
           data: JSON.stringify(taskObject.data),
         };
       }

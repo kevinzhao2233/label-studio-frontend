@@ -27,6 +27,7 @@ const TaskStore = types
      */
     data: types.maybeNull(types.string),
     queue: types.optional(types.maybeNull(types.string), null),
+    cancelledAnnotations: types.optional(types.number, 0),
   })
   .views(self => ({
     get app() {
