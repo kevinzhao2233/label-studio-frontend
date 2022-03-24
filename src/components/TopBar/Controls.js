@@ -6,9 +6,8 @@ import { isDefined } from "../../utils/utilities";
 import { IconBan } from "../../assets/icons";
 
 import "./Controls.styl";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import { Dropdown } from "../../common/Dropdown/DropdownComponent";
-import { FF_DEV_1593, isFF } from "../../utils/feature-flags";
 
 const TOOLTIP_DELAY = 0.8;
 
@@ -31,9 +30,11 @@ const controlsInjector = inject(({ store }) => {
   };
 });
 
+// 拒绝的弹窗
 const RejectDialog = ({ disabled, store }) => {
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState('');
+
   const onReject = useCallback(() => {
     store.rejectAnnotation({ comment: comment.length ? comment : null });
     setShow(false);
@@ -60,14 +61,14 @@ const RejectDialog = ({ disabled, store }) => {
             onChange={(event) => { setComment(event.target.value); }}
           />
           <Elem name='footer' >
-            <Button onClick={() => setShow(false)}>Cancel</Button>
-            <Button style={{ marginLeft: 8 }} look="danger" onClick={onReject}>Reject</Button>
+            <Button onClick={() => setShow(false)}>取消</Button>
+            <Button style={{ marginLeft: 8 }} look="danger" onClick={onReject}>拒绝</Button>
           </Elem >
         </Block >
       )}
     >
       <Button aria-label="reject-annotation" disabled={disabled} look="danger">
-        Reject
+        拒绝
       </Button>
     </Dropdown.Trigger >
   );
@@ -75,6 +76,7 @@ const RejectDialog = ({ disabled, store }) => {
 
 export const Controls = controlsInjector(observer(({ store, history, annotation }) => {
   const isReview = store.hasInterface("review");
+  const hasSkip = store.hasInterface("skip");
   const historySelected = isDefined(store.annotationStore.selectedHistory);
   const { userGenerate, sentUserGenerate, versions, results } = annotation;
   const buttons = [];
@@ -82,22 +84,8 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
   const disabled = store.isSubmitting || historySelected;
   const submitDisabled = store.hasInterface("annotations:deny-empty") && results.length === 0;
 
-  const RejectButton = useMemo(() => {
-    if (isFF(FF_DEV_1593)) {
-      return <RejectDialog disabled={disabled} store={store} />;
-    } else {
-      return (
-        <ButtonTooltip key="reject" title="拒绝该标注结果: [ Ctrl+Space ]">
-          <Button aria-label="reject-annotation" disabled={disabled} look="danger" onClick={store.rejectAnnotation}>
-            拒绝
-          </Button>
-        </ButtonTooltip>
-      );
-    }
-  }, [disabled, store]);
-
   if (isReview) {
-    buttons.push(RejectButton);
+    buttons.push(<RejectDialog key="reject" disabled={disabled} store={store} />);
 
     buttons.push(
       <ButtonTooltip key="accept" title="接受标注: [ Ctrl+Enter ]">
@@ -112,14 +100,14 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
         <IconBan color="#d00" /> 已跳过标注
       </Elem>);
     buttons.push(
-      <ButtonTooltip key="cancel-skip" title="Cancel skip: []">
+      <ButtonTooltip key="cancel-skip" title="取消跳过: []">
         <Button aria-label="cancel-skip" disabled={disabled} look="primary" onClick={store.cancelSkippingTask}>
           取消跳过
         </Button>
       </ButtonTooltip>,
     );
   } else {
-    if (store.hasInterface("skip")) {
+    if (hasSkip) {
       buttons.push(
         <ButtonTooltip key="skip" title="跳过（取消）该任务: [ Ctrl+Space ]">
           <Button aria-label="skip-task" disabled={disabled} look="danger" onClick={store.skipTask}>
@@ -131,9 +119,9 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
 
     if ((userGenerate && !sentUserGenerate) || (store.explore && !userGenerate && store.hasInterface("submit"))) {
       const title = submitDisabled
-        ? "项目中不允许有空的标注"
+        ? "项目中不允许空的标注结果"
         : "保存结果: [ Ctrl+Enter ]";
-      // span is to display tooltip for disabled button
+      // span为禁用的按钮显示工具提示
 
       buttons.push(
         <ButtonTooltip key="submit" title={title}>

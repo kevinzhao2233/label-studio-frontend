@@ -34,6 +34,7 @@ export default types
     project: types.maybeNull(Project),
 
     /**
+     * 猜测：应该就是标注界面左上方 1 of 1 这个东西吧
      * History of task {taskId, annotationId}:
     */
     taskHistory: types.array(types.model({
@@ -251,7 +252,7 @@ export default types
 
     // 绑定快捷键
     function attachHotkeys() {
-      // Unbind previous keys in case LS was re-initialized
+      // 在 LS 重新初始化的情况下取消绑定以前的快捷键
       hotkeys.unbindAll();
 
       /**
@@ -389,8 +390,8 @@ export default types
     }
 
     /**
-     *
-     * @param {*} taskObject
+     * 分配任务，初始化了 self.task，也就是将要标注的 task；然后向历史记录中加了一条
+     * @param {*} taskObject 当前选择的 task
      */
     function assignTask(taskObject) {
       if (taskObject && !Utils.Checkers.isString(taskObject.data)) {
@@ -506,6 +507,7 @@ export default types
       }, "执行取消跳过时失败，请重试");
     }
 
+    // 接受 或者 修复并接受
     function acceptAnnotation() {
       if (self.isSubmitting) return;
 
@@ -522,15 +524,18 @@ export default types
       }, "Error during accept, try again");
     }
 
+    // 拒绝，comment 为填写的评论
     function rejectAnnotation({ comment = null }) {
       if (self.isSubmitting) return;
 
       handleSubmittingFlag(async () => {
+        // 所选的 annotation
         const entity = self.annotationStore.selected;
 
         entity.beforeSend();
         if (!entity.validate()) return;
 
+        // 可以重做
         const isDirty = entity.history.canUndo;
 
         entity.dropDraft();
@@ -540,13 +545,16 @@ export default types
 
     /**
      * Reset annotation store
+     * 重新创建工具、重新绑定快捷键、创建 annotationStore
      */
     function resetState() {
+      // 工具附着到控件和 object tags
+      // 当我们执行新任务时需要重新创建
       // Tools are attached to the control and object tags
       // and need to be recreated when we st a new task
       ToolsManager.removeAllTools();
 
-      // Same with hotkeys
+      // 重新绑定快捷键
       Hotkey.unbindAll();
       self.attachHotkeys();
 
@@ -559,15 +567,16 @@ export default types
     }
 
     /**
-     * Function to initilaze annotation store
-     * Given annotations and predictions
-     * `completions` is a fallback for old projects; they'll be saved as `annotations` anyway
+     * 初始化 annotation store
+     * 指定 annotations and predictions
+     * `completions` 是为了兼容旧项目，最终会被保存为 `annotations`
      */
     function initializeStore({ annotations, completions, predictions, annotationHistory }) {
       const as = self.annotationStore;
 
       as.initRoot(self.config);
 
+      // 处理预测相关
       // eslint breaks on some optional chaining https://github.com/eslint/eslint/issues/12822
       /* eslint-disable no-unused-expressions */
       (predictions ?? []).forEach(p => {
@@ -580,6 +589,7 @@ export default types
         })));
       });
 
+      // 处理 annotation 相关
       [...(completions ?? []), ...(annotations ?? [])]?.forEach((c) => {
         const obj = as.addAnnotation(c);
 
@@ -595,12 +605,17 @@ export default types
       self.setHistory(annotationHistory);
       /* eslint-enable no-unused-expressions */
 
+      // 回调，表示完成了初始化
       if (!self.initialized) {
         self.initialized = true;
         getEnv(self).events.invoke('storageInitialized', self);
       }
     }
 
+    /**
+     * 向 AnnotationStore.history 设置历史
+     * @param {AnnotationStore.history} history 历史记录
+     */
     function setHistory(history = []) {
       const as = self.annotationStore;
 
