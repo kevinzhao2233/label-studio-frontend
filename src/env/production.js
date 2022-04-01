@@ -42,7 +42,7 @@ function rootElement(element) {
  * @param {object} params
  */
 function configureApplication(params) {
-  // callbacks for back compatibility
+  // 回调，以实现兼容
   const osCB = params.submitAnnotation || params.onSubmitAnnotation;
   const ouCB = params.updateAnnotation || params.onUpdateAnnotation;
   const odCB = params.deleteAnnotation || params.onDeleteAnnotation;
@@ -54,11 +54,11 @@ function configureApplication(params) {
     // post: params.post || Requests.poster,
     // remove: params.remove || Requests.remover,
 
-    // communication with the user
+    // 与用户沟通
     alert: m => console.log(m), // Noop for demo: window.alert(m)
     messages: { ...Messages, ...params.messages },
 
-    // callbacks and event handlers
+    // 回调和事件处理程序
     onSubmitAnnotation: params.onSubmitAnnotation ? osCB : External.onSubmitAnnotation,
     onUpdateAnnotation: params.onUpdateAnnotation ? ouCB : External.onUpdateAnnotation,
     onDeleteAnnotation: params.onDeleteAnnotation ? odCB : External.onDeleteAnnotation,
@@ -78,7 +78,7 @@ function configureApplication(params) {
     onNextTask: params.onNextTask || External.onNextTask,
     onPrevTask: params.onPrevTask || External.onPrevTask,
 
-    // other settings aka flags
+    // 其他设置，一些标识
     forceAutoAnnotation: params.forceAutoAnnotation ?? false,
     forceAutoAcceptSuggestions: params.forceAutoAcceptSuggestions ?? false,
   };
@@ -86,4 +86,4 @@ function configureApplication(params) {
   return options;
 }
 
-export default { getData, getState, rootElement, configureApplication };
+export default { rootElement, getState, getData, configureApplication };

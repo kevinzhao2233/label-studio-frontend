@@ -21,7 +21,7 @@ export const DraftPanel = observer(({ item }) => {
 
   if (!item.selected) {
     if (!item.draft) return null;
-    return <div>draft{saved}</div>;
+    return <div>草稿{saved}</div>;
   }
   if (!item.versions.result || !item.versions.result.length) {
     return <div>{saved ? `草稿 ${saved}` : "没有提交的草稿"}</div>;

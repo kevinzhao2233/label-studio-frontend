@@ -389,7 +389,7 @@ const Taxonomy = ({ items, selected: externalSelected, onChange, onAddLabel, onD
         <SelectedList />
         <div className={[styles.taxonomy, isOpenClassName].join(" ")} ref={taxonomyRef}>
           <span onClick={() => setOpen(val => !val)}>
-            {options.placeholder || "Click to add..."}
+            {options.placeholder || "点击添加..."}
             <LsChevron stroke="#09f" />
           </span>
           <TaxonomyDropdown show={isOpen} items={items} flatten={flatten} dropdownRef={dropdownRef} />

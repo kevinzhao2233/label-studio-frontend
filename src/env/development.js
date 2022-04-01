@@ -66,7 +66,7 @@ import { TimeSeriesSingle } from "../examples/timeseries_single";
  */
 // import { AllTypes } from "../examples/all_types";
 
-const data = Sentiment;
+const data = ImageBbox;
 
 function getData(task) {
   if (task && task.data) {
@@ -94,17 +94,18 @@ async function getConfig(pathToConfig) {
  * Get custom config
  */
 async function getExample() {
-  const datatype = data;
 
-  const config = await getConfig(datatype.config);
-  const annotations = datatype.annotation.annotations;
-  const predictions = datatype.tasks[0].predictions;
+  const config = await getConfig(data.config);
+  const annotations = data.annotation.annotations;
+  const predictions = data.tasks[0].predictions;
 
   const task = {
     annotations,
     predictions,
-    data: JSON.stringify(datatype.tasks[0].data),
+    data: JSON.stringify(data.tasks[0].data),
   };
+
+  console.log({ config, task, annotations, predictions });
 
   return { config, task, annotations, predictions };
 }

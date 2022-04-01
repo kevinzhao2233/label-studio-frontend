@@ -14,6 +14,14 @@ export const configureStore = async (params, events) => {
 
   const env = await getEnvironment();
 
+  console.log('>环境获取完成 \n', { env,
+    envExample: env?.getExample(),
+    envState: env?.getState?.(),
+    envConfig: env?.configureApplication(params),
+    envData: env?.getData(),
+    params,
+    events });
+
   params = { ...params };
 
   if (!params?.config && env.getExample) {

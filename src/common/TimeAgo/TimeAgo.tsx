@@ -1,4 +1,5 @@
 import { format, formatDistanceToNow } from "date-fns";
+import { zhCN } from "date-fns/locale";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const SECS = 1000;
@@ -53,11 +54,11 @@ export const TimeAgo = ({ date, ...rest }: TimeAgoProps) => {
 
   return (
     <time
-      dateTime={format(fromTS, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")}
-      title={format(fromTS, "PPpp")}
+      dateTime={format(fromTS, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx", { locale: zhCN })}
+      title={format(fromTS, "PPpp", { locale: zhCN })}
       {...rest}
     >
-      {formatDistanceToNow(fromTS, { addSuffix: true })}
+      {formatDistanceToNow(fromTS, { addSuffix: true, locale: zhCN })}
     </time>
   );
 };

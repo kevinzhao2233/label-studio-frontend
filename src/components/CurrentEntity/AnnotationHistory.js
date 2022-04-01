@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { zhCN } from 'date-fns/locale';
 import { inject, observer } from "mobx-react";
 import { LsSparks, LsThumbsDown, LsThumbsUp } from "../../assets/icons";
 import { Space } from "../../common/Space/Space";
 import { Userpic } from "../../common/Userpic/Userpic";
+import { Button } from '../../common/Button/Button';
 import { Block, Elem } from "../../utils/bem";
 import { isDefined, userDisplayName } from "../../utils/utilities";
 import "./AnnotationHistory.styl";
@@ -13,7 +16,7 @@ const injector = inject(({ store }) => {
 
   return {
     annotationStore: as,
-    selected: as?.selected,
+    selected,
     createdBy: selected?.user ?? { email: selected?.createdBy },
     createdDate: selected?.createdDate,
     history: as?.history,
@@ -25,14 +28,19 @@ export const AnnotationHistory = injector(observer(({
   annotationStore,
   selected,
   createdBy,
-  selectedHistory,
   history,
+  selectedHistory,
 }) => {
+  console.log('LSF AnnotationHistory\n', { annotationStore,
+    selected,
+    createdBy,
+    selectedHistory,
+    history });
   return (
     <Block name="annotation-history">
       <HistoryItem
         user={createdBy}
-        extra="final state"
+        extra="最终状态"
         entity={selected}
         onClick={() => annotationStore.selectHistory(null)}
         selected={!isDefined(selectedHistory)}
@@ -65,6 +73,12 @@ AnnotationHistory.displayName = 'AnnotationHistory';
 
 const HistoryItem = observer(({ entity, user, date, extra, acceptedState, selected = false, selectable = true, onClick }) => {
   const isPrediction = entity?.type === 'prediction';
+  
+  const [showRejectCause, setShowRejectCause] = useState(true);
+
+  const toggleShow = () => {
+    setShowRejectCause(!showRejectCause);
+  };
 
   return (
     <Block name="history-item" mod={{ selected, disabled: !selectable }} onClick={onClick}>
@@ -90,9 +104,12 @@ const HistoryItem = observer(({ entity, user, date, extra, acceptedState, select
             <LsThumbsDown style={{ color: "#dd0000" }}/>
           ) : null}
 
+          {acceptedState === 'rejected' && (
+            <Button size="small" onClick={toggleShow}>{showRejectCause ? '收起' : '查看'}原因</Button>
+          )}
           {date ? (
             <Elem name="date">
-              {formatDistanceToNow(new Date(date), { addSuffix: true })}
+              {formatDistanceToNow(new Date(date), { addSuffix: true, locale: zhCN })}
             </Elem>
           ) : extra ? (
             <Elem name="date">
@@ -101,6 +118,10 @@ const HistoryItem = observer(({ entity, user, date, extra, acceptedState, select
           ) : null}
         </Space>
       </Space>
+      {acceptedState === 'rejected' && showRejectCause && (
+        // TODO 拒绝原因字段
+        <Block name="reject-cause">拒绝原因：{}</Block>
+      )}
     </Block>
   );
 });

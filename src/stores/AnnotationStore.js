@@ -1022,16 +1022,18 @@ const Annotation = types
 
 export default types
   .model("AnnotationStore", {
-    selected: types.maybeNull(types.reference(Annotation)),
-    selectedHistory: types.maybeNull(types.safeReference(Annotation)),
-
-    root: Types.allModelsTypes(),
-    names: types.map(types.reference(Types.allModelsTypes())),
-    toNames: types.map(types.array(types.reference(Types.allModelsTypes()))),
-
     annotations: types.array(Annotation),
     predictions: types.array(Annotation),
+    
+    names: types.map(types.reference(Types.allModelsTypes())),
+    
     history: types.array(Annotation),
+    
+    selected: types.maybeNull(types.reference(Annotation)),
+    selectedHistory: types.maybeNull(types.safeReference(Annotation)),
+    
+    root: Types.allModelsTypes(),
+    toNames: types.map(types.array(types.reference(Types.allModelsTypes()))),
 
     viewingAllAnnotations: types.optional(types.boolean, false),
     viewingAllPredictions: types.optional(types.boolean, false),
