@@ -7,7 +7,7 @@ import { Space } from "../../common/Space/Space";
 import { Userpic } from "../../common/Userpic/Userpic";
 import { Button } from '../../common/Button/Button';
 import { Block, Elem } from "../../utils/bem";
-import { isDefined, userDisplayName } from "../../utils/utilities";
+import { isDefined } from "../../utils/utilities";
 import "./AnnotationHistory.styl";
 
 const injector = inject(({ store }) => {
@@ -92,7 +92,6 @@ const HistoryItem = observer(({ entity, user, date, extra, acceptedState, select
             username={isPrediction ? entity.createdBy : null}
             mod={{ prediction: isPrediction }}
           >{isPrediction && <LsSparks style={{ width: 16, height: 16 }}/>}</Elem>
-          {isPrediction ? entity.createdBy : userDisplayName(user)}
         </Space>
 
         <Space size="small">
