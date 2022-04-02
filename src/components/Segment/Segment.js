@@ -23,5 +23,8 @@ export default class Segment extends React.Component {
 }
 
 Segment.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element.isRequired,
+    PropTypes.array.isRequired,
+  ]),
 };
