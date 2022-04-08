@@ -5,16 +5,16 @@ import React from "react";
 const URL_CORS_DOCS = "https://labelstud.io/guide/storage.html#Troubleshoot-CORS-and-access-problems";
 
 export default {
-  DONE: "Done!",
-  NO_COMP_LEFT: "No more annotations",
-  NO_NEXT_TASK: "No more data available for labeling",
-  NO_ACCESS: "You don't have access to this task",
+  DONE: "完成!",
+  NO_COMP_LEFT: "没有标注结果了",
+  NO_NEXT_TASK: "没有数据可以标注了",
+  NO_ACCESS: "你无权访问此任务",
 
-  CONFIRM_TO_DELETE_ALL_REGIONS: "Please confirm you want to delete all labeled regions",
+  CONFIRM_TO_DELETE_ALL_REGIONS: "请确认：你将要删除所有带标签的任务",
 
   // Tree validation messages
   ERR_REQUIRED: ({ modelName, field }) => {
-    return `Attribute <b>${field}</b> is required for <b>${modelName}</b>`;
+    return `<b>${modelName}</b> 中的参数 <b>${field}</b> 是必须的`;
   },
 
   ERR_UNKNOWN_TAG: ({ modelName, field, value }) => {
@@ -32,7 +32,7 @@ export default {
   },
 
   ERR_PARENT_TAG_UNEXPECTED: ({ validType, value }) => {
-    return `Tag <b>${value}</b> must be a child of one of the tags <b>${[]
+    return `标签 <b>${value}</b> 必须是其中一个标签的子项 <b>${[]
       .concat(validType)
       .join(", ")}</b>.`;
   },
@@ -42,7 +42,7 @@ export default {
   },
 
   ERR_INTERNAL: ({ value }) => {
-    return `Internal error. See browser console for more info. Try again or contact developers.<br/>${value}`;
+    return `内部错误。有关更多信息，请参阅浏览器控制台。请重试或联系开发人员。<br/>${value}`;
   },
 
   ERR_GENERAL: ({ value }) => {
@@ -54,7 +54,7 @@ export default {
 
   ERR_LOADING_AUDIO: ({ attr, url, error }) => (
     <p>
-      Error while loading audio. Check <code>{attr}</code> field in task.
+      加载音频错误. 检查任务中的 <code>{attr}</code> 字段.
       <br />
       Technical description: {error}
       <br />

@@ -117,7 +117,7 @@ const CreateAnnotation = observer(({ annotationStore, onClick }) => {
         <Elem name="userpic" tag={Userpic} mod={{ prediction: true }}>
           <IconPlusCircle/>
         </Elem>
-        Create Annotation
+        新建标注
       </Space>
     </Elem>
   );
@@ -144,7 +144,7 @@ const Annotation = observer(({ entity, selected, onClick, extra, ...props }) => 
           <Space direction="vertical" size="none">
             <Elem name="user">
               <Elem tag="span" name="name">{username}</Elem>
-              <Elem tag="span" name="entity-id">#{entity.pk ?? entity.id}</Elem>
+              <Elem tag="span" name="entity-id">标注#{entity.pk ?? entity.id}</Elem>
             </Elem>
 
             {isDefined(entity.acceptedState) ? (
@@ -153,7 +153,7 @@ const Annotation = observer(({ entity, selected, onClick, extra, ...props }) => 
               </Elem>
             ) : (
               <Elem name="created">
-                created, <Elem name="date" component={TimeAgo} date={entity.createdDate}/>
+                <Elem name="date" component={TimeAgo} date={entity.createdDate}/>创建
               </Elem>
             )}
           </Space>

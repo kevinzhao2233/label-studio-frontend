@@ -12,6 +12,9 @@ function getData(task) {
   return task;
 }
 
+/**
+ * 获取数据
+ */
 function getState(task) {
   return {
     annotations: task?.annotations,

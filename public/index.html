@@ -60,7 +60,7 @@
     <script>
       domReady(function () {
         var ls = new LabelStudio("label-studio", {
-          description: "Description",
+          description: "描述信息",
           interfaces: [
               "panel",
               "update",
@@ -84,7 +84,7 @@
               "predictions:menu",
               "auto-annotation",
               "edit-history",
-              // "topbar:prevnext",
+              "topbar:prevnext",
           ],
           user: {
             "id": 1,
@@ -92,19 +92,19 @@
             "last_name": "Skriabin",
             "username": "nick",
             "email": "nick@heartex.ai",
-            "avatar": null,
+            "avatar": "https://next.antdv.com/assets/logo.1ef800a8.svg",
             "initials": "ni",
           },
           users: [
-            //{
-            //  "id": 1,
-            //  "first_name": "Nick",
-            //  "last_name": "Skriabin",
-            //  "username": "nick",
-            //  "email": "nick@heartex.ai",
-            //  "avatar": null,
-            //  "initials": "ni",
-            //}
+            {
+             "id": 1,
+             "first_name": "Nick",
+             "last_name": "Skriabin",
+             "username": "nick",
+             "email": "nick@heartex.ai",
+             "avatar": null,
+             "initials": "ni",
+            }
           ],
           task: {
             annotations: [],
@@ -114,13 +114,324 @@
               image: "https://626c-blog-117f2e-1259075300.tcb.qcloud.la/%5Bimg%5Dlabel-studio/nick-owuor-astro-nic-visuals-wDifg5xc9Z4-unsplash.jpg?sign=36ed6d84f8f2a4617e7e3274df19df6f&t=1645608625"
             }
           },
-          //history: [{"id":16,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},{"id":17,"created_by":1,"created_at":"2021-05-26T13:03:43.335198Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":34,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}]},{"id":18,"created_by":1,"created_at":"2021-05-26T13:03:49.330745Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":35,"previous_annotation_history":34,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"},{"id":"ALbgPwBdmj","type":"labels","value":{"end":2215,"text":"ale8) December 31, 2017Tr","start":2190,"labels":["MISC"]},"to_name":"text","from_name":"label"}]}],
+          history: HISTORY
+          // history: [{"id":16,"created_by":1,"created_at":"2021-05-26T13:03:36.267438Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":null,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}]},{"id":17,"created_by":1,"created_at":"2021-05-26T13:03:43.335198Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":34,"previous_annotation_history":33,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}]},{"id":18,"created_by":1,"created_at":"2021-05-26T13:03:49.330745Z","accepted":true,"result":null,"annotation":24,"fixed_annotation_history":35,"previous_annotation_history":34,"previous_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"}],"fixed_annotation_history_result":[{"id":"XsW_x1hflv","type":"labels","value":{"end":838,"text":"Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we","start":674,"labels":["LOC"]},"to_name":"text","from_name":"label"},{"id":"FCuvjfSXNs","type":"labels","value":{"end":1662,"text":" Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ","start":1505,"labels":["MISC"]},"to_name":"text","from_name":"label"},{"id":"36kM4Zy2Y5","type":"labels","value":{"end":256,"text":"o do and he couldn t do","start":233,"labels":["PER"]},"to_name":"text","from_name":"label"},{"id":"ALbgPwBdmj","type":"labels","value":{"end":2215,"text":"ale8) December 31, 2017Tr","start":2190,"labels":["MISC"]},"to_name":"text","from_name":"label"}]}],
         });
 
         ls.on("regionFinishedDrawing", (region, list) => {
           console.log("finish drawing", {region, list})
         })
       });
+
+      var HISTORY = [
+        {
+            "id": 16,
+            "created_by": 1,
+            "created_at": "2021-05-26T13:03:36.267438Z",
+            "accepted": true,
+            "result": null,
+            "annotation": 24,
+            "fixed_annotation_history": null,
+            "previous_annotation_history": 33,
+            "previous_annotation_history_result": [
+                {
+                    "id": "XsW_x1hflv",
+                    "type": "labels",
+                    "value": {
+                        "end": 838,
+                        "text": "Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we",
+                        "start": 674,
+                        "labels": [
+                            "LOC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "FCuvjfSXNs",
+                    "type": "labels",
+                    "value": {
+                        "end": 1662,
+                        "text": " Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ",
+                        "start": 1505,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "created_by": 1,
+            "created_at": "2021-05-26T13:03:43.335198Z",
+            "accepted": true,
+            "result": null,
+            "annotation": 24,
+            "fixed_annotation_history": 34,
+            "previous_annotation_history": 33,
+            "previous_annotation_history_result": [
+                {
+                    "id": "XsW_x1hflv",
+                    "type": "labels",
+                    "value": {
+                        "end": 838,
+                        "text": "Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we",
+                        "start": 674,
+                        "labels": [
+                            "LOC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "FCuvjfSXNs",
+                    "type": "labels",
+                    "value": {
+                        "end": 1662,
+                        "text": " Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ",
+                        "start": 1505,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                }
+            ],
+            "fixed_annotation_history_result": [
+                {
+                    "id": "XsW_x1hflv",
+                    "type": "labels",
+                    "value": {
+                        "end": 838,
+                        "text": "Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we",
+                        "start": 674,
+                        "labels": [
+                            "LOC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "FCuvjfSXNs",
+                    "type": "labels",
+                    "value": {
+                        "end": 1662,
+                        "text": " Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ",
+                        "start": 1505,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "36kM4Zy2Y5",
+                    "type": "labels",
+                    "value": {
+                        "end": 256,
+                        "text": "o do and he couldn t do",
+                        "start": 233,
+                        "labels": [
+                            "PER"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "created_by": 1,
+            "created_at": "2021-05-26T13:03:49.330745Z",
+            "accepted": true,
+            "result": null,
+            "annotation": 24,
+            "fixed_annotation_history": 35,
+            "previous_annotation_history": 34,
+            "previous_annotation_history_result": [
+                {
+                    "id": "XsW_x1hflv",
+                    "type": "labels",
+                    "value": {
+                        "end": 838,
+                        "text": "Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we",
+                        "start": 674,
+                        "labels": [
+                            "LOC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "FCuvjfSXNs",
+                    "type": "labels",
+                    "value": {
+                        "end": 1662,
+                        "text": " Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ",
+                        "start": 1505,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "36kM4Zy2Y5",
+                    "type": "labels",
+                    "value": {
+                        "end": 256,
+                        "text": "o do and he couldn t do",
+                        "start": 233,
+                        "labels": [
+                            "PER"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                }
+            ],
+            "fixed_annotation_history_result": [
+                {
+                    "id": "XsW_x1hflv",
+                    "type": "labels",
+                    "value": {
+                        "end": 838,
+                        "text": "Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we",
+                        "start": 674,
+                        "labels": [
+                            "LOC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "FCuvjfSXNs",
+                    "type": "labels",
+                    "value": {
+                        "end": 1662,
+                        "text": " Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ",
+                        "start": 1505,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "36kM4Zy2Y5",
+                    "type": "labels",
+                    "value": {
+                        "end": 256,
+                        "text": "o do and he couldn t do",
+                        "start": 233,
+                        "labels": [
+                            "PER"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "ALbgPwBdmj",
+                    "type": "labels",
+                    "value": {
+                        "end": 2215,
+                        "text": "ale8) December 31, 2017Tr",
+                        "start": 2190,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "created_by": 1,
+            "created_at": "2021-05-26T13:03:49.330745Z",
+            "accepted": false,
+            "reject_cause": "巴拉巴拉",
+            "result": null,
+            "annotation": 24,
+            "fixed_annotation_history": 35,
+            "previous_annotation_history": 34,
+            "previous_annotation_history_result": null,
+            "fixed_annotation_history_result": null,
+            "rejected_annotation_history_result": [
+                {
+                    "id": "XsW_x1hflv",
+                    "type": "labels",
+                    "value": {
+                        "end": 838,
+                        "text": "Media, a Happy and Healthy New Year. 2018 will be a great year for America!  Donald J. Trump (@realDonaldTrump) December 31, 2017Trump s tweet went down about as we",
+                        "start": 674,
+                        "labels": [
+                            "LOC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "FCuvjfSXNs",
+                    "type": "labels",
+                    "value": {
+                        "end": 1662,
+                        "text": " Sandoval (@AlanSandoval13) December 31, 2017Who uses the word Haters in a New Years wish??  Marlene (@marlene399) December 31, 2017You can t just say happy ",
+                        "start": 1505,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "36kM4Zy2Y5",
+                    "type": "labels",
+                    "value": {
+                        "end": 256,
+                        "text": "o do and he couldn t do",
+                        "start": 233,
+                        "labels": [
+                            "PER"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                },
+                {
+                    "id": "ALbgPwBdmj",
+                    "type": "labels",
+                    "value": {
+                        "end": 2215,
+                        "text": "ale8) December 31, 2017Tr",
+                        "start": 2190,
+                        "labels": [
+                            "MISC"
+                        ]
+                    },
+                    "to_name": "text",
+                    "from_name": "label"
+                }
+            ]
+        }
+    ]
     </script>
   </body>
 </html>

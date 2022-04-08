@@ -12,11 +12,16 @@ import { Hotkey } from "./core/Hotkey";
 import defaultOptions from './defaultOptions';
 import { destroy } from "mobx-state-tree";
 
+/**
+ * 文档：https://cn.mobx.js.org/refguide/api.html#isolateglobalstate-boolean
+ * 项目使用了 mobx-state-tree，配置 isolateGlobalState 可以共享状态。该功能需要统一版本号。
+ */
 configure({
   isolateGlobalState: true,
 });
 
 export class LabelStudio {
+  // 多实例？
   static instances = new Set();
 
   static destroyAll() {
@@ -25,18 +30,24 @@ export class LabelStudio {
   }
 
   constructor(root, userOptions = {}) {
+    // defaultOptions 里只有 interfaces
     const options = Object.assign({}, defaultOptions, userOptions ?? {});
 
+    // 自定义快捷键
     if (options.keymap) {
       Hotkey.setKeymap(options.keymap);
     }
-
+    // 渲染的根元素
     this.root = root;
+    // 事件系统
     this.events = new EventInvoker();
+    // 选项
     this.options = options ?? {};
+    // 卸载 lsf，销毁 mobx 数据
     this.destroy = (() => { /* noop */ });
-
+    // 覆盖事件，如果有的话
     this.supportLgacyEvents(options);
+    // 创建 App
     this.createApp();
 
     this.constructor.instances.add(this);
@@ -55,7 +66,9 @@ export class LabelStudio {
   }
 
   async createApp() {
+    // 创建 Store
     const { store, getRoot } = await configureStore(this.options, this.events);
+    // 生成根元素
     const rootElement = getRoot(this.root);
 
     this.store = store;
@@ -76,6 +89,10 @@ export class LabelStudio {
     this.destroy = destructor;
   }
 
+  /**
+   * 覆盖 legacyEvents 中的事件？
+   * 写法是直接在 option 的根级写上事件名，比如 {onNextTask: (nextTaskId) => {...}}
+   */
   supportLgacyEvents() {
     const keys = Object.keys(legacyEvents);
 
@@ -91,4 +108,5 @@ export class LabelStudio {
   }
 }
 
+// 这部分貌似没有用到
 LabelStudio.Component = LabelStudioReact;

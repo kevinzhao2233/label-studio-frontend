@@ -43,13 +43,12 @@ export default types
     }), []),
 
     /**
-     * Configure the visual UI shown to the user
-     * 在 UI 上展示哪些功能
+     * 在界面上展示哪些功能
      */
     interfaces: types.array(types.string),
 
     /**
-     * Flag for labeling of tasks
+     * 标注任务的 falg
      */
     explore: types.optional(types.boolean, false),
 
@@ -85,6 +84,7 @@ export default types
 
     /**
      * Flag for settings
+     * 标注界面中间上方的设置，有快捷键之类的那个
      */
     showingSettings: types.optional(types.boolean, false),
     /**
@@ -97,7 +97,7 @@ export default types
      */
     isLoading: types.optional(types.boolean, false),
     /**
-     * Submitting task; used to prevent from duplicating requests
+     * 提交任务时置为 true，防止重复请求
      */
     isSubmitting: false,
     /**
@@ -109,7 +109,7 @@ export default types
      */
     noAccess: types.optional(types.boolean, false),
     /**
-     * Finish of labeling
+     * 完成标注
      */
     labeledSuccess: types.optional(types.boolean, false),
 
@@ -133,6 +133,9 @@ export default types
      */
     awaitingSuggestions: false,
 
+    /**
+     * 当前任务的所有标注人员
+     */
     users: types.optional(types.array(UserExtended), []),
 
     userLabels: isFF(FF_DEV_1536) ? types.optional(UserLabels, { controls: {} }) : types.undefined,
@@ -590,11 +593,11 @@ export default types
       });
 
       // 处理 annotation 相关
-      [...(completions ?? []), ...(annotations ?? [])]?.forEach((c) => {
-        const obj = as.addAnnotation(c);
+      [...(completions ?? []), ...(annotations ?? [])]?.forEach((a) => {
+        const obj = as.addAnnotation(a);
 
         as.selectAnnotation(obj.id);
-        obj.deserializeResults(c.draft || c.result);
+        obj.deserializeResults(a.draft || a.result);
         obj.reinitHistory();
       });
 

@@ -147,6 +147,7 @@ export function delay(ms = 0) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// 值是否定义，只要不为 null 或 undefined 即可
 export const isDefined = <T>(value: T | null | undefined): value is T => {
   return value !== null && value !== undefined;
 };

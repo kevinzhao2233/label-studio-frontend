@@ -1,7 +1,7 @@
 /**
  * Libraries
  */
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import { Result, Spin } from "antd";
 import { getEnv, getRoot } from "mobx-state-tree";
 import { observer, Provider } from "mobx-react";

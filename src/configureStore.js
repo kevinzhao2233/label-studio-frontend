@@ -1,5 +1,6 @@
 import AppStore from "./stores/AppStore";
 
+// 根据环境不同，获取不同的处理方法
 const getEnvironment = async () => {
   if (process.env.NODE_ENV === "development" && !process.env.BUILD_NO_SERVER) {
     return (await import("./env/development")).default;
@@ -8,7 +9,7 @@ const getEnvironment = async () => {
   return (await import("./env/production")).default;
 };
 
-// params 中包含 defaultOptions 和从 dm 中传递来的 options
+// params 中包含 defaultOptions（只有 interfaces） 和从 dm 中传递来的 options
 export const configureStore = async (params, events) => {
   if (params.options?.secureMode) window.LS_SECURE_MODE = true;
 
@@ -25,11 +26,13 @@ export const configureStore = async (params, events) => {
   params = { ...params };
 
   if (!params?.config && env.getExample) {
+    // 开发环境，task 和 config 都是字符串
     const { task, config } = await env.getExample();
 
     params.config = config;
     params.task = task;
   } else if (params?.task) {
+    // 将 params.task.data 转换为字符串
     params.task = env.getData(params.task);
   }
   if (params.task?.id) {
@@ -40,6 +43,7 @@ export const configureStore = async (params, events) => {
     id: +params.projectId,
   };
 
+  // 暂不清楚 create 第二个参数的含义，但肯定跟事件有关系
   const store = AppStore.create(params, {
     ...env.configureApplication(params),
     events,
@@ -53,7 +57,7 @@ export const configureStore = async (params, events) => {
 
   store.project.id && await store.project.updateProjectData();
 
-  console.log('LSF AppStore 初始化成功', { store });
+  console.log('LSF AppStore 初始化成功, store: ', store);
 
   return { store, getRoot: env.rootElement };
 };

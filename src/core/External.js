@@ -76,10 +76,19 @@ function onRejectAnnotation(store, entity){}
  */
 function onStorageInitialized(ls) {}
 
+/**
+ * Called when submit draft
+ */
 function onSubmitDraft(entity) {}
 
+/**
+ * Called when next Task
+ */
 function onNextTask(nextTaskId) {}
 
+/**
+ * Called when prev Task
+ */
 function onPrevTask(prevTaskId) {}
 
 export default {

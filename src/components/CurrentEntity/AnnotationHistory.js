@@ -2,6 +2,7 @@ import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import { zhCN } from 'date-fns/locale';
 import { inject, observer } from "mobx-react";
+import { toJS } from "mobx";
 import { LsSparks, LsThumbsDown, LsThumbsUp } from "../../assets/icons";
 import { Space } from "../../common/Space/Space";
 import { Userpic } from "../../common/Userpic/Userpic";
@@ -35,7 +36,7 @@ export const AnnotationHistory = injector(observer(({
     selected,
     createdBy,
     selectedHistory,
-    history });
+    history: toJS(history) });
   return (
     <Block name="annotation-history">
       <HistoryItem
@@ -48,7 +49,7 @@ export const AnnotationHistory = injector(observer(({
 
       {history.length > 0 && (
         <>
-          <Elem name="divider" title="History"/>
+          <Elem name="divider" title="历史记录"/>
           {history.map((item) => {
             const { id, user, createdDate } = item;
 

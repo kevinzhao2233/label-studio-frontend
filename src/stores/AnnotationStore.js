@@ -17,7 +17,7 @@ import Area from "../regions/Area";
 import throttle from "lodash.throttle";
 import { ViewModel } from "../tags/visual";
 import { UserExtended } from "./UserStore";
-import { FF_DEV_1555, FF_DEV_1621, isFF } from "../utils/feature-flags";
+import { FF_DEV_1621, isFF } from "../utils/feature-flags";
 
 const hotkeys = Hotkey("Annotations", "Annotations");
 
@@ -1244,16 +1244,15 @@ export default types
 
       const pk = options.pk || options.id;
 
-      //
       const node = {
         userGenerate: false,
         createdDate: Utils.UDate.currentISODate(),
 
         ...options,
 
-        // id is internal so always new to prevent collisions
+        // id 是内部的，所以总是新的，以防止冲突
         id: guidGenerator(5),
-        // pk and id may be missing, so undefined | string
+        // pk和id可能丢失，因此类型为 undefined | string
         pk: pk && String(pk),
         root: self.root,
       };
@@ -1277,6 +1276,7 @@ export default types
       return record;
     }
 
+    // 添加 Annotation，添加的 annotation 会展示在左上方的下拉菜单中
     function addAnnotation(options = {}) {
       options.type = "annotation";
 

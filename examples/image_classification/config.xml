@@ -1,5 +1,11 @@
 <View>
   <Image name="img" value="$image_url"></Image>
+  <Text name="txt-1" value="123123123"/>
+  <Choices name="choice" toName="img">
+    <Choice value="CAT" />
+    <Choice value="DOG" />
+  </Choices>
+  <Text name="txt-1" value="123123123"/>
   <Choices name="choice" toName="img">
     <Choice value="CAT" />
     <Choice value="DOG" />

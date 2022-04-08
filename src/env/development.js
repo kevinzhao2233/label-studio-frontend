@@ -36,6 +36,7 @@ import { ImageOCR } from "../examples/image_ocr";
 import { ImagePolygons } from "../examples/image_polygons";
 import { ImageSegmentation } from "../examples/image_segmentation";
 import { ImageTools } from "../examples/image_tools";
+// import { ImageClassification } from "../examples/image_classification";
 
 /**
  * HTML
@@ -66,8 +67,11 @@ import { TimeSeriesSingle } from "../examples/timeseries_single";
  */
 // import { AllTypes } from "../examples/all_types";
 
-const data = ImageBbox;
+const data = AudioClassification;
 
+/**
+ * 将 data 转换为字符串
+ */
 function getData(task) {
   if (task && task.data) {
     return {
@@ -80,7 +84,7 @@ function getData(task) {
 }
 
 /**
- * Get current config
+ * 获取 XML 配置，将其转化为字符串返回
  * @param {string} pathToConfig
  */
 async function getConfig(pathToConfig) {
@@ -91,10 +95,11 @@ async function getConfig(pathToConfig) {
 }
 
 /**
- * Get custom config
+ * 获取 ../examples 中的配置，为了模仿 ./production.js 中的 getState()
+ * 该方法只在项目初始时运行
  */
 async function getExample() {
-
+  // data.config 是 XML 配置，或者说模板
   const config = await getConfig(data.config);
   const annotations = data.annotation.annotations;
   const predictions = data.tasks[0].predictions;
@@ -105,13 +110,12 @@ async function getExample() {
     data: JSON.stringify(data.tasks[0].data),
   };
 
-  console.log({ config, task, annotations, predictions });
-
   return { config, task, annotations, predictions };
 }
 
 /**
- * Function to return App element
+ * 用来返回根元素
+ * 如果传入的是 id，则查询出来，如果是元素，则直接使用，顺便清除内容，设置宽度
  */
 function rootElement(element) {
   let root;
