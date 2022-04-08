@@ -12,7 +12,6 @@ export default function __canvasWM({
   rotate = '20',
   zIndex = 999999,
 } = {}) {
-  const args = arguments[0];
   const canvas = document.createElement('canvas');
 
   canvas.setAttribute('width', width);
@@ -44,7 +43,7 @@ export default function __canvasWM({
   watermarkDiv.setAttribute('style', styleStr);
   watermarkDiv.classList.add('__wm');
 
-  if (!__wm) {
+  if (!__wm && container) {
     container.style.position = 'relative';
     container.insertBefore(watermarkDiv, container.firstChild);
   }

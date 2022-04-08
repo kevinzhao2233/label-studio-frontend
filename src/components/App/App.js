@@ -261,6 +261,8 @@ class App extends Component {
 
   // MOD 增加水印
   handleWatermark() {
+    if (!this.annotationRootWrapperRef.current) return;
+
     const user = window?.APP_SETTINGS?.user;
 
     try {
@@ -269,7 +271,7 @@ class App extends Component {
         content: user?.email || 'Admin',
       });
     } catch (error) {
-      console.error('水印渲染出错：', error);
+      console.warn('水印渲染出错');
     }
   }
 
