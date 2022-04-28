@@ -37,6 +37,7 @@ const Annotation = types
         types.enumeration(['fixed', 'accepted', 'rejected']),
       ), null,
     ),
+    rejectCause: types.maybeNull(types.string),
 
     createdDate: types.optional(types.string, Utils.UDate.currentISODate()),
     createdAgo: types.maybeNull(types.string),
@@ -54,6 +55,7 @@ const Annotation = types
     draftSaved: types.maybe(types.string),
 
     // created by user during this session
+    // 用户在此次 session 时创建
     userGenerate: types.optional(types.boolean, true),
     update: types.optional(types.boolean, false),
     sentUserGenerate: types.optional(types.boolean, false),
@@ -1237,6 +1239,7 @@ export default types
       }, []);
     }
 
+    // 主要为了填充用户的
     function createItem(options) {
       const { user, config } = self.store;
 
@@ -1298,9 +1301,12 @@ export default types
       return record;
     }
 
+    // 创建新的标注结果
     function createAnnotation(options = { userGenerate: true }) {
       const result = isFF(FF_DEV_1621) ? findNonInteractivePredictionResults() : [];
       const c = self.addAnnotation({ ...options, result });
+
+      console.log('LSF - createAnnotation');
 
       if (result && result.length) {
         const ids = {};
@@ -1336,6 +1342,8 @@ export default types
       options.type = "history";
 
       const item = createItem(options);
+
+      console.log('--==>> addHistory');
 
       self.history.push(item);
 

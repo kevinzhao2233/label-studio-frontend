@@ -67,7 +67,7 @@ import { TimeSeriesSingle } from "../examples/timeseries_single";
  */
 // import { AllTypes } from "../examples/all_types";
 
-const data = AudioClassification;
+const data = RichTextPlain;
 
 /**
  * 将 data 转换为字符串

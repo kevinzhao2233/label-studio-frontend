@@ -15,7 +15,7 @@ export const configureStore = async (params, events) => {
 
   const env = await getEnvironment();
 
-  console.log('>环境获取完成 \n', { env,
+  console.log('lsf configureStore.js configureStore 环境获取完成 \n', { env,
     envExample: env?.getExample(),
     envState: env?.getState?.(),
     envConfig: env?.configureApplication(params),
@@ -52,7 +52,7 @@ export const configureStore = async (params, events) => {
   store.initializeStore({
     ...(params.task ?? {}),
     users: params.users ?? [],
-    annotationHistory: params.history ?? [],
+    annotationHistory: params.task?.history ?? [],
   });
 
   store.project.id && await store.project.updateProjectData();

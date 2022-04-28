@@ -63,6 +63,10 @@ class App extends Component {
     return <Result status="success" title={getEnv(this.props.store).messages.NO_NEXT_TASK} />;
   }
 
+  renderNothingToReview() {
+    return <Result status="success" title={getEnv(this.props.store).messages.NO_NEXT_REVIEW_TASK} />;
+  }
+
   renderNoAccess() {
     return <Result status="warning" title={getEnv(this.props.store).messages.NO_ACCESS} />;
   }
@@ -192,7 +196,7 @@ class App extends Component {
 
     if (store.isLoading) return this.renderLoader();
 
-    if (store.noTask) return this.renderNothingToLabel();
+    if (store.noTask) return store.hasInterface('review') ? this.renderNothingToReview() : this.renderNothingToLabel();
 
     if (store.noAccess) return this.renderNoAccess();
 

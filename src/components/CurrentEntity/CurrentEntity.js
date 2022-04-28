@@ -10,6 +10,7 @@ const injector = inject('store');
 export const CurrentEntity = injector(observer(({
   entity,
   showHistory = true,
+  annotationHistory,
 }) => {
 
   useEffect(()=>{
@@ -70,40 +71,13 @@ export const CurrentEntity = injector(observer(({
 
   return entity ? (
     <Block name="annotation" onClick={e => e.stopPropagation()}>
-      {/* <Elem name="info" tag={Space} spread>
-        <Elem name="id">
-          {entity.type === 'annotation' ? <LsAnnotation /> : <LsSparks color="#944BFF"/>}
-          <span className="text_id">ID: {entity.pk ?? entity.id}</span>
-        </Elem>
-      </Elem> */}
-
-      {/* <Elem name="parent_info">
-        <Space size="small"> */}
-      {/*Always show container to keep the interface layout unchangeable*/}
-      {/* {(entity.parent_prediction) && (
-            <Tooltip title="Prediction ID from which this annotation was created">
-              <Elem name="parent">
-                <Elem tag={LsParentLink} name="parent_link"/>
-                <Elem tag={LsSparks} name="parent_icon" mod={{ prediction: true }}/>
-                <Elem name="parent_text">ID: { entity.parent_prediction }</Elem>
-              </Elem>
-            </Tooltip>
-          )}
-          {(entity.parent_annotation) && (
-            <Tooltip title="Parent annotation ID from which this annotation was created">
-              <Elem name="parent">
-                <Elem tag={LsParentLink} name="parent_link"/>
-                <Elem tag={LsAnnotation} name="parent_icon" mod={{ annotation: true }}/>
-                <Elem name="parent_text">ID: { entity.parent_annotation }</Elem>
-              </Elem>
-            </Tooltip>
-          )} */}
-      {/* </Space>
-      </Elem> */}
 
       <DraftPanel item={entity} />
+      {
+        console.log('lsf >> CurrentEntity', { showHistory, entity, annotationHistory })
+      }
 
-      {showHistory && !entity.userGenerate && (
+      {showHistory && (!entity.userGenerate || !!annotationHistory?.length) && (
         <AnnotationHistory/>
       )}
     </Block>

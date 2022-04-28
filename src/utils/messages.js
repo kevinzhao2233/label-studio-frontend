@@ -7,7 +7,8 @@ const URL_CORS_DOCS = "https://labelstud.io/guide/storage.html#Troubleshoot-CORS
 export default {
   DONE: "完成!",
   NO_COMP_LEFT: "没有标注结果了",
-  NO_NEXT_TASK: "没有数据可以标注了",
+  NO_NEXT_TASK: "所有数据已经标注完成",
+  NO_NEXT_REVIEW_TASK: "所有数据已经审核完成（自己标注的数据不会被自己审核）",
   NO_ACCESS: "你无权访问此任务",
 
   CONFIRM_TO_DELETE_ALL_REGIONS: "请确认：你将要删除所有带标签的任务",

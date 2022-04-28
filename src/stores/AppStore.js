@@ -520,10 +520,11 @@ export default types
         entity.beforeSend();
         if (!entity.validate()) return;
 
+        // 可以撤销
         const isDirty = entity.history.canUndo;
 
         entity.dropDraft();
-        await getEnv(self).events.invoke('acceptAnnotation', self, { isDirty, entity });
+        await getEnv(self).events.invoke('acceptAnnotation', self, entity, isDirty);
       }, "Error during accept, try again");
     }
 
@@ -542,7 +543,7 @@ export default types
         const isDirty = entity.history.canUndo;
 
         entity.dropDraft();
-        await getEnv(self).events.invoke('rejectAnnotation', self, { isDirty, entity, comment });
+        await getEnv(self).events.invoke('rejectAnnotation', self, { isDirty, annotation: entity, comment });
       }, "Error during reject, try again");
     }
 
@@ -606,8 +607,8 @@ export default types
       if (current) current.setInitialValues();
 
       self.setHistory(annotationHistory);
-      /* eslint-enable no-unused-expressions */
 
+      /* eslint-enable no-unused-expressions */
       // 回调，表示完成了初始化
       if (!self.initialized) {
         self.initialized = true;
@@ -620,26 +621,41 @@ export default types
      * @param {AnnotationStore.history} history 历史记录
      */
     function setHistory(history = []) {
+      // history = window.HISTORY;
       const as = self.annotationStore;
+
+      console.log('lsf - setHistory');
 
       as.clearHistory();
 
       (history ?? []).forEach(item => {
-        const fixed = isDefined(item.fixed_annotation_history_result);
-        const accepted = item.accepted;
-
+        const operateStateMap = {
+          1: 'accepted',
+          2: 'fixed',
+          3: 'rejected',
+        };
+        const user = self.users.find(user => user.id === item.user);
+        // obj 是最近添加进去的
         const obj = as.addHistory({
           ...item,
           pk: guidGenerator(),
-          user: item.created_by,
+          user,
           createdDate: item.created_at,
-          acceptedState: accepted ? (fixed ? "fixed" : "accepted") : "rejected",
+          // 在这里格式一下
+          operateStatus: item.operate_status,
+          acceptedState: operateStateMap[item.operate_status] ?? null,
+          rejectCause: item.review_text ?? null,
           editable: false,
+          result: null,
+          fixed_annotation_history: null,
+          fixed_annotation_history_result: null,
+          previous_annotation_history: item.annotation,
+          previous_annotation_history_result: item.annotation_result,
         });
 
-        const result = item.previous_annotation_history_result ?? [];
+        const previousResult = item.annotation_result ?? [];
 
-        obj.deserializeResults(result, { hidden: true });
+        obj.deserializeResults(previousResult, { hidden: true });
       });
     }
 

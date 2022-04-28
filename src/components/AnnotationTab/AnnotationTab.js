@@ -18,6 +18,7 @@ export const AnnotationTab = observer(({ store }) => {
           showControls={store.hasInterface("controls")}
           canDelete={store.hasInterface("annotations:delete")}
           showHistory={store.hasInterface("annotations:history")}
+          annotationHistory={as.history}
           showGroundTruth={store.hasInterface("ground-truth")}
         />
       )}

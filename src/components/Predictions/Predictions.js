@@ -47,7 +47,7 @@ const Prediction = observer(({ item, store }) => {
         </div>
         <div className={styles.buttons}>
           {item.selected && (
-            <Tooltip placement="topLeft" title="Add a new annotation based on this prediction">
+            <Tooltip placement="topLeft" title="根据当前预测创建新的标注">
               <Button
                 size="small"
                 onClick={ev => {

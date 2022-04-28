@@ -59,6 +59,7 @@ export const AnnotationHistory = injector(observer(({
                 user={user ?? { email: item?.createdBy }}
                 date={createdDate}
                 acceptedState={item.acceptedState}
+                rejectCause={item.rejectCause ?? item.pk}
                 selected={selectedHistory?.id === item.id}
                 selectable={item.results.length}
                 onClick={() => annotationStore.selectHistory(item)}
@@ -72,7 +73,7 @@ export const AnnotationHistory = injector(observer(({
 }));
 AnnotationHistory.displayName = 'AnnotationHistory';
 
-const HistoryItem = observer(({ entity, user, date, extra, acceptedState, selected = false, selectable = true, onClick }) => {
+const HistoryItem = observer(({ entity, user, date, extra, acceptedState, rejectCause, selected = false, selectable = true, onClick }) => {
   const isPrediction = entity?.type === 'prediction';
   
   const [showRejectCause, setShowRejectCause] = useState(true);
@@ -120,7 +121,7 @@ const HistoryItem = observer(({ entity, user, date, extra, acceptedState, select
       </Space>
       {acceptedState === 'rejected' && showRejectCause && (
         // TODO 拒绝原因字段
-        <Block name="reject-cause">拒绝原因：{}</Block>
+        <Block name="reject-cause">拒绝原因：{rejectCause}</Block>
       )}
     </Block>
   );
