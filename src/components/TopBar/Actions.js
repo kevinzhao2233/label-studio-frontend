@@ -51,7 +51,7 @@ export const Actions = ({ store }) => {
             aria-label="Delete"
             onClick={() => {
               confirm({
-                title: "删除标注任务",
+                title: "删除标注结果",
                 body: "该操作无法撤销",
                 buttonLook: "destructive",
                 okText: "确定",

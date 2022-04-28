@@ -504,6 +504,7 @@ const Annotation = types
     async startAutosave() {
       if (!getEnv(self).events.hasEvent('submitDraft')) return;
       if (self.type !== "annotation") return;
+      if (getRoot(self).hasInterface('review')) return;
 
       // some async tasks should be performed after deserialization
       // so start autosave on next tick
@@ -574,6 +575,11 @@ const Annotation = types
         // at this point the whole tree is available. This method
         // may come handy when you have a tag that acts or depends
         // on other elements in the tree.
+        /**
+         * 当 annotation 附加到主 store 是调用，
+         * 此时整个 state 树都可用。当你有一个 tag
+         * 作用于或依赖于树中的其他元素时，此方法可能会很方便。
+         */
         if (node.annotationAttached) node.annotationAttached();
 
         // copy tools from control tags into object tools manager
@@ -1174,7 +1180,7 @@ export default types
         return (self.root = ViewModel.create({ id:"empty" }));
       }
 
-      // convert config to mst model
+      // 将配置转换为 mst 模型
       let rootModel;
 
       try {

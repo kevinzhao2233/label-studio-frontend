@@ -41,7 +41,7 @@ export const AnnotationHistory = injector(observer(({
     <Block name="annotation-history">
       <HistoryItem
         user={createdBy}
-        extra="最终状态"
+        extra="最新状态"
         entity={selected}
         onClick={() => annotationStore.selectHistory(null)}
         selected={!isDefined(selectedHistory)}

@@ -11,7 +11,7 @@ export default {
   NO_NEXT_REVIEW_TASK: "所有数据已经审核完成（自己标注的数据不会被自己审核）",
   NO_ACCESS: "你无权访问此任务",
 
-  CONFIRM_TO_DELETE_ALL_REGIONS: "请确认：你将要删除所有带标签的任务",
+  CONFIRM_TO_DELETE_ALL_REGIONS: "请确认：你将要删除所有已标注的信息",
 
   // Tree validation messages
   ERR_REQUIRED: ({ modelName, field }) => {
