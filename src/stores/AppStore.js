@@ -576,6 +576,7 @@ export default types
      * `completions` 是为了兼容旧项目，最终会被保存为 `annotations`
      */
     function initializeStore({ annotations, completions, predictions, annotationHistory }) {
+      console.log('lsf AppStore.js initializeStore\n',  { annotations, completions, predictions, annotationHistory });
       const as = self.annotationStore;
 
       as.initRoot(self.config);
@@ -621,10 +622,7 @@ export default types
      * @param {AnnotationStore.history} history 历史记录
      */
     function setHistory(history = []) {
-      // history = window.HISTORY;
       const as = self.annotationStore;
-
-      console.log('lsf - setHistory');
 
       as.clearHistory();
 
@@ -638,7 +636,7 @@ export default types
         // obj 是最近添加进去的
         const obj = as.addHistory({
           ...item,
-          pk: guidGenerator(),
+          pk: item.annotation ?? item.id ?? guidGenerator(),
           user,
           createdDate: item.created_at,
           // 在这里格式一下

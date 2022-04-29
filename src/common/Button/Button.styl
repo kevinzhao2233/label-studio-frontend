@@ -32,11 +32,10 @@
 
   &:active
     background linear-gradient(0deg, rgba(#000, 0.02), rgba(#000, 0.02)), #FFFFFF
-    box-shadow inset 0px 1px 0px rgba(#000, 0.1), inset 0px 0px 0px 1px rgba(#000, 0.2)
+    box-shadow 0px 0px 0px 6px rgba($accent_color, 0.2), inset 0px -1px 0px rgba(#000, 0.1), inset 0px 0px 0px 1px rgba(#000, 0.15), inset 0px 0px 0px 1px rgba($accent_color, 0.2)
 
   &:focus
-    outline none
-    box-shadow 0px 0px 0px 6px rgba($accent_color, 0.2), inset 0px -1px 0px rgba(#000, 0.1), inset 0px 0px 0px 1px rgba(#000, 0.15), inset 0px 0px 0px 1px rgba($accent_color, 0.2)
+    // outline none
 
   &__extra
     font-size 14px
@@ -50,7 +49,7 @@
 
   &__icon
     display flex
-    width 16px
+    width 36px
     height 100%
     align-items center
 
@@ -98,10 +97,10 @@
       &:active
         color var(--button-color)
         background linear-gradient(0deg, rgba(#000, 0.04), rgba(#000, 0.04)), $accent_color
-        box-shadow inset 0px 1px 0px rgba(#000, 0.1)
-
-      &:focus
+        // box-shadow inset 0px 1px 0px rgba(#000, 0.1)
         box-shadow 0px 0px 0px 6px rgba($accent_color, 0.2), inset 0px -1px 0px rgba(#000, 0.1)
+
+      // &:focus
 
     &_danger
       --button-color $danger_color

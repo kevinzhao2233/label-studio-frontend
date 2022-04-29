@@ -1245,7 +1245,7 @@ export default types
       }, []);
     }
 
-    // 主要为了填充用户的
+    // 填充一些数据，或者说格式化一些数据
     function createItem(options) {
       const { user, config } = self.store;
 
@@ -1348,8 +1348,6 @@ export default types
       options.type = "history";
 
       const item = createItem(options);
-
-      console.log('--==>> addHistory');
 
       self.history.push(item);
 

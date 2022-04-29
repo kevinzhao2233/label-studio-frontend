@@ -7,6 +7,7 @@ import { LsSparks, LsThumbsDown, LsThumbsUp } from "../../assets/icons";
 import { Space } from "../../common/Space/Space";
 import { Userpic } from "../../common/Userpic/Userpic";
 import { Button } from '../../common/Button/Button';
+import { info } from '../../common/Modal/Modal';
 import { Block, Elem } from "../../utils/bem";
 import { isDefined } from "../../utils/utilities";
 import "./AnnotationHistory.styl";
@@ -14,13 +15,20 @@ import "./AnnotationHistory.styl";
 const injector = inject(({ store }) => {
   const as = store.annotationStore;
   const selected = as?.selected;
+  const history = as?.history.filter((item) => {
+    if (selected.pk) {
+      return item.pk === selected.pk;
+    } else {
+      return item.acceptedState === 'rejected';
+    }
+  });
 
   return {
     annotationStore: as,
     selected,
     createdBy: selected?.user ?? { email: selected?.createdBy },
     createdDate: selected?.createdDate,
-    history: as?.history,
+    history,
     selectedHistory: as?.selectedHistory,
   };
 });
@@ -32,11 +40,20 @@ export const AnnotationHistory = injector(observer(({
   history,
   selectedHistory,
 }) => {
-  console.log('LSF AnnotationHistory\n', { annotationStore,
+  console.log('LSF AnnotationHistory\n', {
+    annotationStore,
     selected,
     createdBy,
     selectedHistory,
     history: toJS(history) });
+  // if (history.length && history[0]?.acceptedState === 'rejected') {
+  //   info({
+  //     style: { width: '500px' },
+  //     footer: null,
+  //     title: '该标注结果被拒绝，需要重新标注',
+  //     body: `拒绝原因：${history[0].rejectCause}`,
+  //   });
+  // }
   return (
     <Block name="annotation-history">
       <HistoryItem
@@ -59,7 +76,7 @@ export const AnnotationHistory = injector(observer(({
                 user={user ?? { email: item?.createdBy }}
                 date={createdDate}
                 acceptedState={item.acceptedState}
-                rejectCause={item.rejectCause ?? item.pk}
+                rejectCause={item.rejectCause ?? ''}
                 selected={selectedHistory?.id === item.id}
                 selectable={item.results.length}
                 onClick={() => annotationStore.selectHistory(item)}
