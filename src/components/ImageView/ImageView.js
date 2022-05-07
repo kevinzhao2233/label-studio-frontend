@@ -100,10 +100,10 @@ const SELECTION_DASH = [3, 3];
 
 const SelectionBorders = observer(({ item, selectionArea }) => {
   const { selectionBorders: bbox } = selectionArea;
-  const offset = {
-    x: item.zoomingPositionX || 0,
-    y: item.zoomingPositionY || 0,
-  };
+  // const offset = {
+  //   x: item.zoomingPositionX || 0,
+  //   y: item.zoomingPositionY || 0,
+  // };
 
   bbox.left = bbox.left * item.stageScale;
   bbox.right = bbox.right * item.stageScale;

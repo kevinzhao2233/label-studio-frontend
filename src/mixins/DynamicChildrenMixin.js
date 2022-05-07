@@ -1,10 +1,10 @@
-import { flow, types } from "mobx-state-tree";
+import { types } from "mobx-state-tree";
 import ProcessAttrsMixin from "./ProcessAttrs";
 import { parseValue } from "../utils/data";
 
 const DynamicChildrenMixin = types.model({
 })
-  .views(self => {
+  .views(() => {
     return {
       get defaultChildType() {
         console.error("DynamicChildrenMixin needs to implement defaultChildType getter in views");

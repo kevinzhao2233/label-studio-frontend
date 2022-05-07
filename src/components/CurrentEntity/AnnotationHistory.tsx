@@ -105,15 +105,15 @@ const HistoryItemComponent: FC<{
 
   const reason = useMemo(() => {
     switch(acceptedState) {
-      case "accepted": return "Accepted";
-      case "rejected": return "Rejected";
-      case "fixed_and_accepted": return "Fixed";
-      case "updated": return "Updated";
-      case "submitted": return "Submitted";
-      case 'prediction': return "From prediction";
-      case 'imported': return "Imported";
-      case 'skipped': return "Skipped";
-      case "draft_created": return "Created a draft";
+      case "accepted": return "已接受";
+      case "rejected": return "已拒绝";
+      case "fixed_and_accepted": return "已修复";
+      case "updated": return "已更新";
+      case "submitted": return "已提交";
+      case 'prediction': return "来自预测";
+      case 'imported': return "已导入";
+      case 'skipped': return "已跳过";
+      case "draft_created": return "已创建草稿";
       default: return null;
     }
   }, []);

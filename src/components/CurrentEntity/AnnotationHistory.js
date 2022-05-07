@@ -7,7 +7,7 @@ import { LsSparks, LsThumbsDown, LsThumbsUp } from "../../assets/icons";
 import { Space } from "../../common/Space/Space";
 import { Userpic } from "../../common/Userpic/Userpic";
 import { Button } from '../../common/Button/Button';
-import { info } from '../../common/Modal/Modal';
+// import { info } from '../../common/Modal/Modal';
 import { Block, Elem } from "../../utils/bem";
 import { isDefined } from "../../utils/utilities";
 import "./AnnotationHistory.styl";

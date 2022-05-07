@@ -1,13 +1,11 @@
 import Keymaster from "keymaster";
-import { ButtonHTMLAttributes, cloneElement, CSSProperties, DOMAttributes, FC, forwardRef, ForwardRefExoticComponent, HTMLAttributes, useMemo } from "react";
+import { ButtonHTMLAttributes, cloneElement, CSSProperties, FC, forwardRef, ForwardRefExoticComponent, useMemo } from "react";
 import { Hotkey } from "../../core/Hotkey";
 import { useHotkey } from "../../hooks/useHotkey";
 import { Block, CNTagName, Elem } from "../../utils/bem";
 import { isDefined } from "../../utils/utilities";
 import { Tooltip } from "../Tooltip/Tooltip";
 import "./Button.styl";
-
-const hotkeys = Hotkey();
 
 type HTMLButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "type">
 

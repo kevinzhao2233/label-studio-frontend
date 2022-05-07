@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
 import { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Block, Elem } from "../../utils/bem";
-import { FF_DEV_1507, isFF } from "../../utils/feature-flags";
+// import { FF_DEV_1507, isFF } from "../../utils/feature-flags";
 import { isDefined, userDisplayName } from "../../utils/utilities";
 import { Tooltip } from "../Tooltip/Tooltip";
 import "./Userpic.styl";

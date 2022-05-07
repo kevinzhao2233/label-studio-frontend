@@ -73,18 +73,14 @@ class App extends Component {
         }}
       >
         <Result status="success" title={getEnv(this.props.store).messages.NO_NEXT_TASK} />
-        <Block name="sub__result">You have completed all tasks in the queue!</Block>
+        <Block name="sub__result">你已完成队列中的所有任务！</Block>
         {store.canGoPrevTask && (
           <Button onClick={() => store.prevTask()} look="outlined" style={{ margin: "16px 0" }}>
-            Go to Previous Task
+            跳转到上一个任务
           </Button>
         )}
       </Block>
     );
-  }
-
-  renderNothingToReview() {
-    return <Result status="success" title={getEnv(this.props.store).messages.NO_NEXT_REVIEW_TASK} />;
   }
 
   renderNoAccess() {
@@ -216,7 +212,7 @@ class App extends Component {
 
     if (store.isLoading) return this.renderLoader();
 
-    if (store.noTask) return store.hasInterface('review') ? this.renderNothingToReview() : this.renderNothingToLabel();
+    if (store.noTask) return this.renderNothingToLabel();
 
     if (store.noAccess) return this.renderNoAccess();
 
