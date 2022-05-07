@@ -9,7 +9,7 @@ import Utils from "../utils";
 import messages from "../utils/messages";
 import { guidGenerator } from "../utils/unique";
 import { delay, isDefined } from "../utils/utilities";
-import AnnotationStore from "./AnnotationStore";
+import AnnotationStore from "./Annotation/store";
 import Project from "./ProjectStore";
 import Settings from "./SettingsStore";
 import Task from "./TaskStore";
@@ -69,7 +69,7 @@ export default types
     /**
      * Debug for development environment
      */
-    debug: types.optional(types.boolean, true),
+    debug: window.HTX_DEBUG === true,
 
     /**
      * Settings of Label Studio
@@ -478,7 +478,7 @@ export default types
     }
 
     // 更新
-    function updateAnnotation() {
+    function updateAnnotation(extraData) {
       if (self.isSubmitting) return;
 
       const entity = self.annotationStore.selected;
@@ -488,7 +488,7 @@ export default types
       if (!entity.validate()) return;
 
       handleSubmittingFlag(async () => {
-        await getEnv(self).events.invoke('updateAnnotation', self, entity);
+        await getEnv(self).events.invoke('updateAnnotation', self, entity, extraData);
         // 更新项目的数据
         self.project.id && await self?.project.updateProjectData();
       });
@@ -627,33 +627,9 @@ export default types
       as.clearHistory();
 
       (history ?? []).forEach(item => {
-        const operateStateMap = {
-          1: 'accepted',
-          2: 'fixed',
-          3: 'rejected',
-        };
-        const user = self.users.find(user => user.id === item.user);
-        // obj 是最近添加进去的
-        const obj = as.addHistory({
-          ...item,
-          pk: item.annotation ?? item.id ?? guidGenerator(),
-          user,
-          createdDate: item.created_at,
-          // 在这里格式一下
-          operateStatus: item.operate_status,
-          acceptedState: operateStateMap[item.operate_status] ?? null,
-          rejectCause: item.review_text ?? null,
-          editable: false,
-          result: null,
-          fixed_annotation_history: null,
-          fixed_annotation_history_result: null,
-          previous_annotation_history: item.annotation,
-          previous_annotation_history_result: item.annotation_result,
-        });
+        const obj = as.addHistory(item);
 
-        const previousResult = item.annotation_result ?? [];
-
-        obj.deserializeResults(previousResult, { hidden: true });
+        obj.deserializeResults(item.result ?? [], { hidden: true });
       });
     }
 

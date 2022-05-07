@@ -33,9 +33,7 @@ export default {
   },
 
   ERR_PARENT_TAG_UNEXPECTED: ({ validType, value }) => {
-    return `标签 <b>${value}</b> 必须是其中一个标签的子项 <b>${[]
-      .concat(validType)
-      .join(", ")}</b>.`;
+    return `标签 <b>${value}</b> 必须是其中一个标签的子项 <b>${[].concat(validType).join(", ")}</b>.`;
   },
 
   ERR_BAD_TYPE: ({ modelName, field, validType }) => {

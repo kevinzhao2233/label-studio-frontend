@@ -6,8 +6,9 @@ import { isDefined } from "../../utils/utilities";
 import { IconBan } from "../../assets/icons";
 
 import "./Controls.styl";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Dropdown } from "../../common/Dropdown/DropdownComponent";
+import { FF_DEV_1593, isFF } from "../../utils/feature-flags";
 
 const TOOLTIP_DELAY = 0.8;
 
@@ -30,47 +31,43 @@ const controlsInjector = inject(({ store }) => {
   };
 });
 
-// 拒绝的弹窗
-const RejectDialog = ({ disabled, store }) => {
+const ActionDialog = ({ buttonProps, prompt, type, action, onAction }) => {
   const [show, setShow] = useState(false);
-  const [comment, setComment] = useState('');
-
-  const onReject = useCallback(() => {
-    store.rejectAnnotation({ comment: comment.length ? comment : null });
+  const [comment, setComment] = useState("");
+  const onClick = useCallback(() => {
+    onAction({ comment: comment.length ? comment : null });
     setShow(false);
-    setComment('');
+    setComment("");
   });
 
   return (
     <Dropdown.Trigger
       visible={show}
       toggle={() => { }}
-      onToggle={(visible) => {
-        setShow(visible);
-      }}
+      onToggle={setShow}
       content={(
-        <Block name="reject-dialog">
+        <Block name="action-dialog">
           <Elem name="input-title">
-            拒绝原因
+            {prompt}
           </Elem>
           <Elem
-            name='input'
-            tag={'textarea'}
+            name="input"
+            tag="textarea"
             type="text"
             value={comment}
             onChange={(event) => { setComment(event.target.value); }}
           />
-          <Elem name='footer' >
+          <Elem name="footer">
             <Button onClick={() => setShow(false)}>取消</Button>
-            <Button style={{ marginLeft: 8 }} look="danger" onClick={onReject}>拒绝</Button>
-          </Elem >
-        </Block >
+            <Button style={{ marginLeft: 8 }} onClick={onClick} {...buttonProps}>{action}</Button>
+          </Elem>
+        </Block>
       )}
     >
-      <Button aria-label="reject-annotation" disabled={disabled} look="danger">
-        拒绝
+      <Button aria-label={`${type}-annotation`} {...buttonProps}>
+        {action}
       </Button>
-    </Dropdown.Trigger >
+    </Dropdown.Trigger>
   );
 };
 
@@ -84,8 +81,30 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
   const disabled = store.isSubmitting || historySelected;
   const submitDisabled = store.hasInterface("annotations:deny-empty") && results.length === 0;
 
+  const RejectButton = useMemo(() => {
+    if (isFF(FF_DEV_1593) && store.hasInterface("comments:reject")) {
+      return (
+        <ActionDialog
+          type="reject"
+          onAction={store.rejectAnnotation}
+          buttonProps={{ disabled, look: "danger" }}
+          prompt="拒绝的原因"
+          action="拒绝"
+        />
+      );
+    } else {
+      return (
+        <ButtonTooltip key="reject" title="Reject annotation: [ Ctrl+Space ]">
+          <Button aria-label="reject-annotation" disabled={disabled} look="danger" onClick={store.rejectAnnotation}>
+            Reject
+          </Button>
+        </ButtonTooltip>
+      );
+    }
+  }, [disabled, store]);
+
   if (isReview) {
-    buttons.push(<RejectDialog key="reject" disabled={disabled} store={store} />);
+    buttons.push(RejectButton);
 
     buttons.push(
       <ButtonTooltip key="accept" title="接受标注: [ Ctrl+Enter ]">
@@ -121,7 +140,6 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
       const title = submitDisabled
         ? "项目中不允许空的标注结果"
         : "保存结果: [ Ctrl+Enter ]";
-      // span为禁用的按钮显示工具提示
 
       buttons.push(
         <ButtonTooltip key="submit" title={title}>
@@ -135,13 +153,32 @@ export const Controls = controlsInjector(observer(({ store, history, annotation 
     }
 
     if ((userGenerate && sentUserGenerate) || (!userGenerate && store.hasInterface("update"))) {
-      buttons.push(
-        <ButtonTooltip key="update" title="提交该任务: [ Ctrl+Enter ]">
-          <Button aria-label="submit" disabled={disabled || submitDisabled} look="primary" onClick={store.updateAnnotation}>
-            {sentUserGenerate || versions.result ? "更新" : "提交"}
-          </Button>
-        </ButtonTooltip>,
-      );
+      const isUpdate = sentUserGenerate || versions.result;
+      const isRejected = store.task.queue === "Rejected queue";
+      const withComments = store.hasInterface("comments:update");
+      let button;
+
+      if (withComments && isRejected && isUpdate) {
+        button = (
+          <ActionDialog
+            type="update"
+            onAction={store.updateAnnotation}
+            buttonProps={{ disabled: disabled || submitDisabled, look: "primary" }}
+            prompt="给审核人的评论"
+            action="更新"
+          />
+        );
+      } else {
+        button = (
+          <ButtonTooltip key="update" title={(isUpdate ? '更新' : '提交') + '该任务: [ Alt+Enter ]'}>
+            <Button aria-label="submit" disabled={disabled || submitDisabled} look="primary" onClick={() => store.updateAnnotation()}>
+              {isUpdate ? "更新" : "提交"}
+            </Button>
+          </ButtonTooltip>
+        );
+      }
+
+      buttons.push(button);
     }
   }
 

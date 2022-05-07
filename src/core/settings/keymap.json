@@ -72,6 +72,14 @@
     "key": "alt+h",
     "description": "是否展示该标注区域"
   },
+  "region:lock": {
+    "key": "alt+l",
+    "description": "Lock selected region"
+  },
+  "region:meta": {
+    "key": "alt+m",
+    "description": "Edit selected region meta"
+  },
   "region:unselect": {
     "key": "u",
     "description": "取消选择"
@@ -128,5 +136,13 @@
   "video:fastforward": {
     "key": "shift+ctrl+alt+right",
     "description": "到最后一帧"
+  },
+  "video:hop-backward": {
+    "key": "shift+alt+left",
+    "description": "向后跳"
+  },
+  "video:hop-forward": {
+    "key": "shift+alt+right",
+    "description": "向前跳"
   }
 }

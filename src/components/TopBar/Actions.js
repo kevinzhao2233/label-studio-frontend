@@ -1,3 +1,6 @@
+/**
+ * TopBar 左侧的内容
+ */
 import { IconCopy, IconInfo, IconViewAll, LsSettings, LsTrash } from "../../assets/icons";
 import { Button } from "../../common/Button/Button";
 import { Tooltip } from "../../common/Tooltip/Tooltip";
@@ -12,8 +15,10 @@ export const Actions = ({ store }) => {
   const entity = annotationStore.selected;
   const saved = !entity.userGenerate || entity.sentUserGenerate;
   const isPrediction = entity?.type === 'prediction';
-  // const history = entity.history;
   const isViewAll = annotationStore.viewingAll;
+  const hasVideo = Array.from(store.annotationStore.names.values()).some((tag) => {
+    return tag.type.match(/video/ig);
+  });
 
   const onToggleVisibility = useCallback(() => {
     annotationStore.toggleViewingAllAnnotations();
@@ -21,7 +26,7 @@ export const Actions = ({ store }) => {
 
   return (
     <Elem name="section">
-      {store.hasInterface("annotations:view-all") && (
+      {store.hasInterface("annotations:view-all") && !hasVideo && (
         <Tooltip title="查看所有标注">
           <Button
             icon={<IconViewAll />}
